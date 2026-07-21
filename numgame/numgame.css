@@ -29,7 +29,7 @@ button {
 }
 
 button:hover {
-    background-color: black
+    background-color: rgb(163, 180, 255)
 }
 
 #message-text {
