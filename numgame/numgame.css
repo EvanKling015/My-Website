@@ -1,0 +1,19 @@
+.game-card {
+    background: #333;
+}
+
+.game-box {
+    background: #333;
+    padding: 20px;
+    border: 2px solid whitesmoke;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#num-field {
+    width: 120px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+    text-align: center;
+}
