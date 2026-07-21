@@ -4,38 +4,43 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../styles.css">
     </head>
     <body>
         <header>
-            <h1>Welcome to My Team Project</h1>
+            <h1>Welcome to Our Number Game</h1>
         </header>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../aboutus.html">About Us</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><a href="numgame.html">Number Game</a></li>
             </ul>
         </nav>
 
         <main>
-            <section class="card">
-                <h2>Home Page</h2>
-                <p>Our two team members are a part of the WPI Frontiers program.<br>They joined the Computer Science Class to lean more.</p>
+            <section class="card game-card">
+                <h2>Play the Number Game</h2>
+                <p class="tagline">Guess the secret number between 1 and 100.</p>
             </section>
 
-            <section class="card">
-                <h2>About The Project</h2>
-                <p>This section provides information about our team and project.</p>
-                <ul>
-                    <li>Team Member 1: Matthew Schick</li>
-                    <li>Team Member 2: Evan Kling</li>
-                </ul>
-            </section>
+            <div class=""game-box>
+                <label for="num-field">Make a guess:</label>
+                <input type="number" id="num-field">
+                <button id="guess-button">Make Guess</button>
+                <button id="reset-button">Reset Game</button>
+
+                <p id="message-text">Enter a number between 1 and 100</p>
+                <p id="guess-count-text">Guesses: 0</p>
+            </div>
         </main>
 
         <footer>
             <p>&copy; 2026 Our Frontiers Team Project. All rights reserved.</p>
         </footer>
+
+        <script src="numgame.js"></script>
+        <script src="numgame_test.js"></script>
     </body>
 </html>
