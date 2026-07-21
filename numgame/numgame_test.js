@@ -21,3 +21,11 @@ numField.value = "50";
 makeGuess();
 console.assert(guessCount === 3, "guesscount is not 3 after third guess");
 console.assert(messageText.textContent === "Congratulations! You've guessed the number!", "messageText is not correct after third guess");
+
+try {
+    numField.value = "abc"
+    makeGuess();
+} catch (error) {
+    console.assert(messageText.textContent === "Please ender a valid number between 1 and 100.",
+        "messageText is not correct after invalid guess");
+}
