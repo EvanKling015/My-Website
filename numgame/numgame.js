@@ -15,7 +15,7 @@ let guessCount = 0;
 function loadGame() {
     secret = Math.floor(Math.random()* (max-min+1)) + min;
     guessCount = 0;
-    messageText.textContent = "Guess a number between "+ min + "and " + max;
+    messageText.textContent = "Guess a number between "+ min + " and " + max;
     guessCountText.textContent = "Guesses: " + guessCount;
     numField.value = "";
 }
