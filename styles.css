@@ -40,7 +40,7 @@ main {
 
 .card h2 {
     margin-top: 0;
-    color: #333;
+    color: #fff;
 }
 
 footer {
@@ -52,7 +52,7 @@ footer {
 }
 
 nav a {
-    color: #fff;
+    color: #333;
     text-decoration: none;
     margin: 0 15px;
     font-size: 18px;
