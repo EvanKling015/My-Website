@@ -7,3 +7,17 @@ console.assert(min === 1, "min is not 1");
 console.assert(max === 100, "max is not 100");
 console.assert(secret >= min && secret <= max, "secret is not between min and max");
 console.assert(guessCount === 0, "guessCount is not 0");
+
+secret = 50;
+makeGuess();
+numField.value = "25";
+console.assert(guessCount === 1, "guessCount is not 1 after first guess")
+console.assert(messageText.textContent === "Try again! The secret number is higher.", "messageText is not correct after first guess");
+numField.value = "75";
+makeGuess();
+console.assert(guessCount === 2, "guessCount is not 2 after second guess");
+console.assert(messageText.textContent === "Try again! The secret number is lower.", "messgeText is not correct after second guess");
+numField.value = "50";
+makeGuess();
+console.assert(guessCount === 3, "guesscount is not 3 after third guess");
+console.assert(messageText.textContent === "Congratulations! You've guessed the number!", "messageText is not correct after third guess");
