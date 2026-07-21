@@ -31,3 +31,13 @@ button {
 button:hover {
     background-color: #444
 }
+
+#message-text {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#guess-count-text {
+    font-weight: bold;
+}
