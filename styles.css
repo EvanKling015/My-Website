@@ -58,3 +58,12 @@ nav a {
     font-size: 18px;
     border-radius: 6px;
 }
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+nav li {
+    display: inline-block;
+}
