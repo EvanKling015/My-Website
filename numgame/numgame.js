@@ -20,7 +20,7 @@ function loadGame() {
     numField.value = "";
 }
 
-function checkGuess() {
+function makeGuess() {
     const guess = parseInt(numField.value);
     if (isNaN(guess)){
         messageText.textContent = "Please enter a valid number between " +min+" and "+max;
@@ -30,17 +30,17 @@ function checkGuess() {
     guessCountText.textContent = "Guesses: "+ guessCount;
 
     if (guess === secret) {
-        messageText.textContent = "Congratulations! You've guessed the right number!";
+        messageText.textContent = "Congratulations! You've guessed the number!";
     }
     else if (guess < secret) {
-        messageText.textContent = "Try again! The secret number is higher";
+        messageText.textContent = "Try again! The secret number is higher.";
     }
     else {
-        messageText.textContent = "Try again! The secret number is lower";
+        messageText.textContent = "Try again! The secret number is lower.";
     }
 }
 
-guessButton.addEventListener("click", checkGuess);
+guessButton.addEventListener("click", makeGuess);
 resetButton.addEventListener("click", loadGame);
 
 loadGame();
