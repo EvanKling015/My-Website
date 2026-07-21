@@ -3,9 +3,9 @@
 }
 
 .game-box {
-    background:white;
+    background:whitesmoke;
     padding: 20px;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 12px;
     text-align: center;
 }
