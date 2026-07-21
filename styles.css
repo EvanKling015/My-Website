@@ -68,3 +68,9 @@ nav ul {
 nav li {
     display: inline-block;
 }
+
+.tagline {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 0px;
+}
