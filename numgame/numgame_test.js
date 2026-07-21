@@ -9,8 +9,8 @@ console.assert(secret >= min && secret <= max, "secret is not between min and ma
 console.assert(guessCount === 0, "guessCount is not 0");
 
 secret = 50;
-makeGuess();
 numField.value = "25";
+makeGuess();
 console.assert(guessCount === 1, "guessCount is not 1 after first guess")
 console.assert(messageText.textContent === "Try again! The secret number is higher.", "messageText is not correct after first guess");
 numField.value = "75";
