@@ -42,6 +42,12 @@ function loadGame() {
 function blowUp() {
     if (myConfetti) {
             myConfetti({
+                particleCount: 10000,
+                spread: 360
+            });
+        }
+    if (myConfetti) {
+            myConfetti({
                 particleCount: 100000000,
                 spread: 360
             });
