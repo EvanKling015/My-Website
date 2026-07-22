@@ -4,39 +4,95 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../styles.css">
     </head>
     <body>
         <header>
-            <h1>Welcome to My Team Project</h1>
+            <h1>Welcome to Our Word Game</h1>
         </header>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="numgame/numgame.html">Number Game</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../aboutus.html">About Us</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><a href="../numgame/numgame.html">Number Game</a></li>
+                <li><a href="wordgame.html" class="active">Word Game</a></li>
             </ul>
         </nav>
 
         <main>
-            <section class="card">
-                <h2>Home Page</h2>
-                <p>Our two team members are a part of the WPI Frontiers program.<br>They joined the Computer Science Class to lean more.</p>
+            <section class="card game-card">
+                <h2>Guess the secret word.</h2>
+                <p>Guess 5-letter word.</p>
+            
+
+                <div id="secret-display">
+                    <span>?</span>
+                    <span>?</span>
+                    <span>?</span>
+                    <span>?</span>
+                    <span>?</span>
+                 </div>
+
+                 <label for="guess-field">Enter your guess:</label>
+                 <input type="text" id="guess-field" maxlength="5" placeholder="APPLE">
+
+                 <button id="guess-button">Make Guess</button>
+                 <button id="reset-button">Reset Game</button>
+
+                 <p id="message-text">Enter a 5-letter word.</p>
             </section>
 
-            <section class="card">
-                <h2>About The Project</h2>
-                <p>This section provides information about our team and project.</p>
-                <ul>
-                    <li>Team Member 1: Matthew Schick</li>
-                    <li>Team Member 2: Evan Kling</li>
-                </ul>
-            </section>
+            <!-- history-table -->
+             <section class="card">
+                <h2>Guess History</h2>
+                <table id="history-table-body">
+                    <thead>
+                        <tr>
+                            <th>Attempt</th>
+                            <th>Guess</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- history rows will be added here dynamically -->
+                    </tbody>
+                </table>
+             </section>
+
+             <section class="card">
+                <h2>Letter feedback</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Color</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="correct-demo">Green</td>
+                            <td>Correct letter in the correct position</td>
+                        </tr>
+                        <tr>
+                            <td class="close-demo">Yellow</td>
+                            <td>Correct letter but in the wrong position</td>
+                        </tr>
+                        <tr>
+                            <td class="wrong-demo">Gray</td>
+                            <td>Letter is not in the word</td>
+                        </tr>
+                    </tbody>
+                </table>
+             </section>
+
         </main>
 
         <footer>
             <p>&copy; 2026 Our Frontiers Team Project. All rights reserved.</p>
         </footer>
+
+        <script src="wordgame.js"></script>
+        <script src="wordgame_test.js"></script>
     </body>
 </html>
