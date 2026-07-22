@@ -10,7 +10,10 @@ let min = 1;
 let max = 100;
 //create a number bretween min and max
 let secret;
+let maxGuess = Math.ceil(Math.log2(max-min+1));
 let guessCount = 0;
+let minpos;
+let maxpos;
 
 //create confetti object
 let myConfetti = null;
@@ -27,6 +30,12 @@ function loadGame() {
     messageText.textContent = "Guess a number between "+ min + " and " + max;
     guessCountText.textContent = "Guesses: " + guessCount;
     numField.value = "";
+    maxGuess = Math.ceil(Math.log2(max-min+1));
+    min = 1;
+    minpos = min;
+    max = 100;
+    maxpos = max;
+    
 }
 
 function blowUp() {
@@ -40,16 +49,24 @@ function blowUp() {
 
 function makeGuess() {
     const guess = parseInt(numField.value);
-    if (isNaN(guess)){
+    if (isNaN(guess)||guess>max||guess<min){
         messageText.textContent = "Please enter a valid number between " +min+" and "+max;
         return;
     }
-    else if ( guessCount >= 5) {
+    else if ( guessCount >= maxGuess) {
         messageText.textContent = "You ran out of guesses, the number was " + secret +". Press reset game to play again";
         return;
     }
+    if (guess < secret){
+        minpos = guess + 1;
+    }
+    else if (guess > secret){
+        maxpos = guess - 1
+    }
     guessCount++;
-    guessCountText.textContent = "Guesses: "+ guessCount;
+    guessCountText.textContent = "Guesses: "+ guessCount +" of "+ maxGuess+
+    " (Next guess should be between " +minpos+" and " + maxpos+")"+
+    " (Next midpoint: "+Math.floor((minpos+maxpos)/2)+")";
 
     if (guess === secret) {
         messageText.textContent = "Congratulations! You've guessed the number!";
@@ -81,5 +98,11 @@ function makeGuess() {
 guessButton.addEventListener("click", makeGuess);
 resetButton.addEventListener("click", loadGame);
 lagButton.addEventListener("click", blowUp);
+
+numField.addEventListener("keydown", function(event) {
+    if (event.key === "Enter"){
+        makeGuess()
+    }
+})
 
 loadGame();
