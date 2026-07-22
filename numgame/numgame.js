@@ -4,6 +4,7 @@ const messageText = document.getElementById("message-text");
 const guessCountText = document.getElementById("guess-count-text");
 const guessButton = document.getElementById("guess-button");
 const resetButton = document.getElementById("reset-button");
+const lagButton = document.getElementById("lag-button");
 //set min and max
 let min = 1;
 let max = 100;
@@ -26,6 +27,15 @@ function loadGame() {
     messageText.textContent = "Guess a number between "+ min + " and " + max;
     guessCountText.textContent = "Guesses: " + guessCount;
     numField.value = "";
+}
+
+function blowUp() {
+    if (myConfetti) {
+            myConfetti({
+                particleCount: 100000000
+                spread: 360
+            });
+        }
 }
 
 function makeGuess() {
@@ -70,5 +80,6 @@ function makeGuess() {
 
 guessButton.addEventListener("click", makeGuess);
 resetButton.addEventListener("click", loadGame);
+lagButton.addEventListener("click", blowup);
 
 loadGame();
