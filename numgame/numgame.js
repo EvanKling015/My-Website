@@ -60,7 +60,17 @@ function makeGuess() {
             });
         }
     }
-    else if(guess === 67 && guessCount == 1){ 
+    else if(guess === 67){
+        messageText.textContent = "KYS unfunny mf"
+        if (myConfetti) {
+            myConfetti({
+                particleCount: 300,
+                spread: 160
+            });
+        }
+        
+    }
+    else if(guess === 67){
         messageText.textContent = "KYS unfunny mf"
         if (myConfetti) {
             myConfetti({
