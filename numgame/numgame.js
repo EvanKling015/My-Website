@@ -34,6 +34,10 @@ function makeGuess() {
         messageText.textContent = "Please enter a valid number between " +min+" and "+max;
         return;
     }
+    else if ( guessCount >= 5) {
+        messageText.textContent = "You ran out of guesses, the number was " + secret +". Press reset game to play again";
+        return;
+    }
     guessCount++;
     guessCountText.textContent = "Guesses: "+ guessCount;
 
@@ -45,6 +49,16 @@ function makeGuess() {
                 spread: 160
             });
         }
+    }
+    else if(guess === 67){
+        messageText.textContent = "KYS unfunny mf"
+        if (myConfetti) {
+            myConfetti({
+                particleCount: 300,
+                spread: 160
+            });
+        }
+        
     }
     else if (guess < secret) {
         messageText.textContent = "Try again! The secret number is higher.";
