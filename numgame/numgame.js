@@ -55,7 +55,7 @@ function makeGuess() {
         messageText.textContent = "Congratulations! You've guessed the number!";
         if (myConfetti) {
             myConfetti({
-                particleCount: 15000,
+                particleCount: 1500000,
                 spread: 360
             });
         }
