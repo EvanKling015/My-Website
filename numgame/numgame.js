@@ -38,6 +38,7 @@ function loadGame() {
     
 }
 
+
 function blowUp() {
     if (myConfetti) {
             myConfetti({
