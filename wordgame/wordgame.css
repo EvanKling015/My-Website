@@ -1,0 +1,79 @@
+.game-card {
+    text-align: center;
+}
+#secret-display {
+    margin: 20px 0;
+}
+#secret-display span {
+    display: inline-block;
+    background-color: antiquewhite;
+    border: 20px solid #0f0e0e;
+    border-radius: 8px;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin: 4px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+input {
+    font-size: 18px;
+    padding: 8px;
+    width: 140px;
+    margin: 8px;
+    text-transform: uppercase;
+
+}
+button {
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 8%;
+    font-size: 16px;
+    padding: 10px 14px;
+    margin: 6px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: darkgray;
+}
+#message-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+th, td {
+    border: 1px solid #4f4e4e;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #2c2b2b;
+    color: white;
+}
+
+.letter-box {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 8px 11px;
+    margin: 2px;
+    font-weight: bold;
+    color: black;
+}
+.correct,
+.correct-demo {
+    background-color: green;
+}
+.close,
+.close-demo {
+    background-color: #c6c928;
+}
+.wrong,
+.wrong-demo {
+    background-color: darkgray;
+}
