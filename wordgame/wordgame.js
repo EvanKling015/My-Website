@@ -28,3 +28,5 @@ function hideSecretWord() {
         secretDisplay.appendChild(box);
     }
 }
+
+startgame();
