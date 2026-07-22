@@ -11,6 +11,14 @@ let max = 100;
 let secret;
 let guessCount = 0;
 
+//create confetti object
+let myConfetti = null;
+if (window.confetti){
+    myConfetti = confetti.create(null, {
+        resize: true,
+        useWorker: true
+    });
+}
 
 function loadGame() {
     secret = Math.floor(Math.random()* (max-min+1)) + min;
@@ -31,6 +39,12 @@ function makeGuess() {
 
     if (guess === secret) {
         messageText.textContent = "Congratulations! You've guessed the number!";
+        if (myConfetti) {
+            myConfetti({
+                particleCount: 100,
+                spread: 160
+            });
+        }
     }
     else if (guess < secret) {
         messageText.textContent = "Try again! The secret number is higher.";
