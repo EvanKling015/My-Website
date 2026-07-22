@@ -90,6 +90,6 @@ function makeGuess() {
 
 guessButton.addEventListener("click", makeGuess);
 resetButton.addEventListener("click", loadGame);
-lagButton.addEventListener("click", blowup);
+lagButton.addEventListener("click", blowUp);
 
 loadGame();
