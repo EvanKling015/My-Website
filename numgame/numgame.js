@@ -32,7 +32,7 @@ function loadGame() {
 function blowUp() {
     if (myConfetti) {
             myConfetti({
-                particleCount: 100000000
+                particleCount: 100000000,
                 spread: 360
             });
         }
