@@ -55,10 +55,20 @@ function makeGuess() {
         messageText.textContent = "Congratulations! You've guessed the number!";
         if (myConfetti) {
             myConfetti({
-                particleCount: 100,
+                particleCount: 15000,
+                spread: 360
+            });
+        }
+    }
+    else if(guess === 67){
+        messageText.textContent = "KYS unfunny mf"
+        if (myConfetti) {
+            myConfetti({
+                particleCount: 300,
                 spread: 160
             });
         }
+        
     }
     else if(guess === 67){
         messageText.textContent = "KYS unfunny mf"
