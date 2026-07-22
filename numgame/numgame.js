@@ -38,6 +38,7 @@ function loadGame() {
     
 }
 
+
 function blowUp() {
     if (myConfetti) {
             myConfetti({
@@ -72,7 +73,7 @@ function makeGuess() {
         messageText.textContent = "Congratulations! You've guessed the number!";
         if (myConfetti) {
             myConfetti({
-                particleCount: 1500000,
+                particleCount: 9500,
                 spread: 360
             });
         }
