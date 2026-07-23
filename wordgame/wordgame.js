@@ -98,5 +98,10 @@ function addGuessToHistory(guess, resultHTML) {
 
 guessButton.addEventListener("click", checkGuess);
 resetButton.addEventListener("click", startGame);
+guessField.addEventListener("keydown", function(event) {
+    if (event.key === "Enter"){
+        checkGuess()
+    }
+})
 
 startGame();
