@@ -36,14 +36,15 @@ function hideSecretWord() {
             messageText.textContent = "please enter a " + secretWord.length + "-letter word.";
             return;
         }
-
+        let resultHTML = buildLetterFeedBack(guess);
+        
         if (guess === secretWord) {
             messageText.textContent = "Congratulations! You've guessed the word!";
             showSecretWord();
-            addGuessToHistory(guess);
+            addGuessToHistory(guess, resultHTML);
         } else {
             messageText.textContent = "Wrong guess. Try again!";
-            addGuessToHistory(guess);
+            addGuessToHistory(guess, resultHTML);
         }
     }
 
@@ -57,8 +58,27 @@ function showSecretWord() {
     }
 }
 
+
+function buildLetterFeedBack(guess) {
+    let resultHTML = "";
+    for (let i = 0; i < guess.length; i++) {
+        let letter = guess[i];
+        let cssClass = "";
+        if (letter === secretWord[i]) {
+            cssClass = "correct";
+        } else if (secretWord.includes(letter)) {
+             cssClass = "close";
+        } else {
+            cssClass = "wrong";
+        }
+        resultHTML += `<span class="letter-box ${cssClass}">${letter.toUpperCase()}</span>`;
+    }
+    return resultHTML;
+}
+
 // stub function to add the guess to the history table
-function addGuessToHistory(guess) {
+function addGuessToHistory(guess, resultHTML) {
+    
 }
 
 startGame();
