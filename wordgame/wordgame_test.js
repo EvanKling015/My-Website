@@ -13,4 +13,3 @@ console.assert(messageText.textContent === "Guess the f-letter secret word!", "m
 console.assert(secretDisplay.innerHTML === "?????", "SD should have 5 qm");
 console.assert(words.includes(secretword), "sw should be in words list");
 console.assert(guessField.value === "", "guess field should be empty");
-console.assert(secretDisplay.textContent === "?????", "secretDisplay should show 5 question marks")
