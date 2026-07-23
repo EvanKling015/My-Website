@@ -62,15 +62,30 @@ function showSecretWord() {
 
 function buildLetterFeedBack(guess) {
     let resultHTML = "";
+    //resetting secretdisplay
+    secretDisplay.innerHTML = "";
     for (let i = 0; i < guess.length; i++) {
         let letter = guess[i];
         let cssClass = "";
         if (letter === secretWord[i]) {
             cssClass = "correct";
+            //display
+            let box = document.createElement("span");;
+            box.innerHTML = secretWord[i].toUpperCase();
+            box.classList.add("correct");
+        secretDisplay.appendChild(box);
         } else if (secretWord.includes(letter)) {
-             cssClass = "close";
+            cssClass = "close";
+            //display
+            let box = document.createElement("span");
+            box.innerHTML = "?";
+            secretDisplay.appendChild(box);
         } else {
             cssClass = "wrong";
+            //display
+            let box = document.createElement("span");
+            box.innerHTML = "?";
+            secretDisplay.appendChild(box);
         }
         resultHTML += `<span class="letter-box ${cssClass}">${letter.toUpperCase()}</span>`;
     }
