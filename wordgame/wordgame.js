@@ -16,6 +16,7 @@ function startGame() {
     tries = 0;
     messageText.textContent = "Guess the 5-letter secret word!";
     guessField.value = "";
+    historyTableBody.innerHTML = "";
     hideSecretWord();
     
 }
