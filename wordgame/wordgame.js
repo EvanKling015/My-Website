@@ -1,4 +1,4 @@
-const words = ["apple", "peach", "lemon", "berry", "mango", "grape", "melon", "aahed", "aalii", "aargh", "aarti", "abuse", "abyss", "admix", "admin", "allow", "aloft", "adapt", "afore", "alone", "alive", "amaze", "agile",];
+const words = ["apple", "peach", "lemon", "berry", "mango", "grape", "melon", "aahed", "aalii", "aargh", "aarti", "abuse", "abyss", "admix", "admin", "allow", "aloft", "adapt", "afore", "alone", "alive", "amaze", "agile","xenia", "zaddy", "zesty", "zilch", "zeros", "zippy", "yarco","yasss", "waddy", "water", "leche", "cream", "white", "black", "apple", "tanks" ];
 
 let secretWord = "";
 let tries = 0;
