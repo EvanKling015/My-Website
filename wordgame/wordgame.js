@@ -78,7 +78,22 @@ function buildLetterFeedBack(guess) {
 
 // stub function to add the guess to the history table
 function addGuessToHistory(guess, resultHTML) {
-    
+    let row = document.createElement("tr");
+
+    let tryCell = document.createElement("td");
+    tryCell.innerHTML = tries;
+
+    let guessCell = document.createElement("td");
+    guessCell.innerHTML = guess.toUpperCase();
+
+    let resultCell = document.createElemtent("td")
+    resultCell.innerHTML = resultHTML;
+
+    row.appendChild(guessCell);
+    row.appendChild(tryCell);
+    row.appendChild(resultCell);
+
+    historyTableBody.appendChild(row);
 }
 
 startGame();
