@@ -86,7 +86,7 @@ function addGuessToHistory(guess, resultHTML) {
     let guessCell = document.createElement("td");
     guessCell.innerHTML = guess.toUpperCase();
 
-    let resultCell = document.createElemtent("td")
+    let resultCell = document.createElement("td")
     resultCell.innerHTML = resultHTML;
 
     row.appendChild(guessCell);

@@ -28,3 +28,17 @@ console.assert(tries === 2, "tries should be 2");
 console.assert(messageText.textContent === "Congratulations! You've guessed the word!", "msg should say youre right");
 console.assert(secretDisplay.textContent === "APPLE", "secretDisplay should show right word");
 
+//test letterfeedback function
+secretWord = "apple";
+guessField.value = "ahead";
+guess = "ahead";
+let feedback = buildLetterFeedBack(guess);
+console.assert(feedback.includes('class="letter-box correct"'), "feedback needs right class for a");
+console.assert(feedback.includes('class="letter-box close"'), "feedback needs right class for e");
+console.assert(feedback.includes('class="letter-box wrong"'), "feedback needs right class for h and d");
+let result_string = '<span class="letter-box correct">A</span> \
+<span class="letter-box wrong">H</span> \
+<span class="letter-box close">E</span> \
+<span class="letter-box close">A</span> \
+<span class="letter-box wrong">D</span>';
+console.assert(feedback === result_string, "feedback should match expected results");
