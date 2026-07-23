@@ -11,7 +11,7 @@ const secretDisplay = document.getElementById("secret-display")
 const historyTableBody = document.getElementById("history-table-body")
 
 /* start the game by selecting a random word from the list and resetting the tries */
-function startgame() {
+function startGame() {
     secretWord = words[Math.floor(Math.random() * words.length)];
     tries = 0;
     messageText.textContent = "Guess the 5-letter secret word!";
@@ -30,7 +30,7 @@ function hideSecretWord() {
 }
 
     function checkGuess() {
-        const guess = guessField.value.toLowercase();
+        const guess = guessField.value.toLowerCase();
         tries++;
         if (guess.length !== secretWord.length) {
             messageText.textContent = "please enter a " + secretWord.length + "-letter word.";
@@ -50,7 +50,7 @@ function hideSecretWord() {
 function showSecretWord() {
     secretDisplay.innerHTML = "";
     for (let i =0; i < secretWord.length; i++) {
-        let box = doccument.createElement("span");;
+        let box = document.createElement("span");;
         box.innerHTML = secretWord[i].toUpperCase();
         box.classList.add("correct");
         secretDisplay.appendChild(box);
@@ -61,4 +61,4 @@ function showSecretWord() {
 function addGuessToHistory(guess) {
 }
 
-startgame();
+startGame();
