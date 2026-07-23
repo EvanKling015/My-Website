@@ -36,9 +36,22 @@ let feedback = buildLetterFeedBack(guess);
 console.assert(feedback.includes('class="letter-box correct"'), "feedback needs right class for a");
 console.assert(feedback.includes('class="letter-box close"'), "feedback needs right class for e");
 console.assert(feedback.includes('class="letter-box wrong"'), "feedback needs right class for h and d");
-let result_string = '<span class="letter-box correct">A</span> \
-<span class="letter-box wrong">H</span> \
-<span class="letter-box close">E</span> \
-<span class="letter-box close">A</span> \
+let result_string = '<span class="letter-box correct">A</span>\
+<span class="letter-box wrong">H</span>\
+<span class="letter-box close">E</span>\
+<span class="letter-box close">A</span>\
 <span class="letter-box wrong">D</span>';
 console.assert(feedback === result_string, "feedback should match expected results");
+
+//test add guess to history
+addGuessToHistory(guess, result_string);
+
+//test table has one row with current guess
+console.assert(historyTableBody.children.length === 2, "history table should have 2 rows");
+console.assert(Number(historyTableBody.children[0].children[1].textContent) === tries, 
+    "History table entry should match number of tries");
+console.assert(historyTableBody.children[1].children[0].textContent === guess.toUpperCase(),
+    "History entry should be guessed word in uppercase");
+console.assert(historyTableBody.children[1].children[2].innerHTML === result_string,
+    "History entry should match the feedback html");
+
