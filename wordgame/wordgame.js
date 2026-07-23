@@ -29,4 +29,36 @@ function hideSecretWord() {
     }
 }
 
+    function checkGuess() {
+        const guess = guessField.value.toLowercase();
+        tries++;
+        if (guess.length !== secretWord.length) {
+            messageText.textContent = "please enter a " + secretWord.length + "-letter word.";
+            return;
+        }
+
+        if (guess === secretWord) {
+            messageText.textContent = "Congratulations! You've guessed the word!";
+            showSecretWord();
+            addGuessToHistory(guess);
+        } else {
+            messageText.textContent = "Wrong guess. Try again!";
+            addGuessToHistory(guess);
+        }
+    }
+
+function showSecretWord() {
+    secretDisplay.innerHTML = "";
+    for (let i =0; i < secretWord.length; i++) {
+        let box = doccument.createElement("span");;
+        box.innerHTML = secretWord[i].toUpperCase();
+        box.classList.add("correct");
+        secretDisplay.appendChild(box);
+    }
+}
+
+// stub function to add the guess to the history table
+function addGuessToHistory(guess) {
+}
+
 startgame();
