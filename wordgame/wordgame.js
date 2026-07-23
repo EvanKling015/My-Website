@@ -96,4 +96,7 @@ function addGuessToHistory(guess, resultHTML) {
     historyTableBody.appendChild(row);
 }
 
+guessButton.addEventListener("click", checkGuess);
+resetButton.addEventListener("click", startGame);
+
 startGame();
