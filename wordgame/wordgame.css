@@ -27,8 +27,8 @@ input {
 
 }
 button {
-    background-color: gray;
-    color: white;
+    background-color: peru;
+    color: black;
     border: none;
     border-radius: 8%;
     font-size: 16px;
@@ -37,7 +37,7 @@ button {
     cursor: pointer;
 }
 button:hover {
-    background-color: darkgray;
+    background-color: lightblue;
 }
 #message-text {
     font-size: 20px;
@@ -49,7 +49,7 @@ table {
     margin-top: 12px;
 }
 th, td {
-    border: 1px solid #4f4e4e;
+    border: 1px solid purple;
     padding: 10px;
     text-align: center;
 }
