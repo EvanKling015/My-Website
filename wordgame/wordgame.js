@@ -1,7 +1,8 @@
-const words = ["apple", "peach", "lemon", "berry", "mango", "grape", "melon", "aahed", "aalii", "aargh", "aarti", "abuse", "abyss", "admix", "admin", "allow", "aloft", "adapt", "afore", "alone", "alive", "amaze", "agile","xenia", "zaddy", "zesty", "zilch", "zeros", "zippy", "yarco","yasss", "waddy", "water", "leche", "cream", "white", "black", "tanks" ];
+//const words = ["apple", "peach", "lemon", "berry", "mango", "grape", "melon", "aahed", "aalii", "aargh", "aarti", "abuse", "abyss", "admix", "admin", "allow", "aloft", "adapt", "afore", "alone", "alive", "amaze", "agile","xenia", "zaddy", "zesty", "zilch", "zeros", "zippy", "yarco","yasss", "waddy", "water", "leche", "cream", "white", "black", "tanks" ];
 
 let secretWord = "";
 let tries = 0;
+let words;
 
 const guessField = document.getElementById("guess-field")
 const guessButton = document.getElementById("guess-button")
@@ -12,7 +13,8 @@ const historyTableBody = document.getElementById("history-table-body")
 
 /* start the game by selecting a random word from the list and resetting the tries */
 function startGame() {
-    secretWord = words[Math.floor(Math.random() * words.length)];
+
+    console.log(getExternalData());
     tries = 0;
     messageText.textContent = "Guess the 5-letter secret word!";
     guessField.value = "";
@@ -20,6 +22,28 @@ function startGame() {
     hideSecretWord();
     
 }
+
+//make confetti 
+let myConfetti = null;
+if (window.confetti){
+    myConfetti = confetti.create(null, {
+        resize: true,
+        useWorker: true
+    });
+}
+
+async function getExternalData(){
+    const url = "https://random-word-api.herokuapp.com/word?length=5";
+    try {
+        const response = await fetch(url);
+    
+    const data = await response.json();
+    secretWord = data[0];
+    hideSecretWord();
+    } catch (error) {
+    console.error("Fetch failed");
+    }
+    }
 
 function hideSecretWord() {
     secretDisplay.innerHTML = "";
@@ -33,6 +57,11 @@ function hideSecretWord() {
     function checkGuess() {
         const guess = guessField.value.toLowerCase();
         tries++;
+        if (tries >= 7) {
+            messageText.innerHTML = "Game over!";
+            messageText.
+            return;
+        }
         if (guess.length !== secretWord.length) {
             messageText.textContent = "please enter a " + secretWord.length + "-letter word.";
             return;
@@ -41,6 +70,12 @@ function hideSecretWord() {
         
         if (guess === secretWord) {
             messageText.textContent = "Congratulations! You've guessed the word!";
+            if (myConfetti) {
+            myConfetti({
+                particleCount: 5000,
+                spread: 360
+            });
+            }
             showSecretWord();
             addGuessToHistory(guess, resultHTML);
         } else {
