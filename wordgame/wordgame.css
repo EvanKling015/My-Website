@@ -20,6 +20,11 @@
     text-align: center;
 }
 
+#secret-display .correct {
+    background-color: green;
+    color: white;
+}
+
 .guess-row {
     margin-bottom: 5px;
 }
