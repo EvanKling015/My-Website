@@ -180,7 +180,6 @@ function checkGuess() {
         addGuessToHistory(guess, resultHTML);
         
         // Disable board because they won
-        guessField.disabled = true;
         guessButton.disabled = true;
     } else {
         addGuessToHistory(guess, resultHTML);
