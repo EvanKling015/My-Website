@@ -63,35 +63,23 @@ function hideSecretWord() {
     }
 }
 
-    function checkGuess() {
-        const guess = guessField.value.toLowerCase();
-        tries++;
-        if (tries >= 7) {
-            messageText.innerHTML = "Game over!";
-            messageText.
-            return;
-        }
-        if (guess.length !== secretWord.length) {
-            messageText.textContent = "please enter a " + secretWord.length + "-letter word.";
-            return;
-        }
-        let resultHTML = buildLetterFeedBack(guess);
-        
-        if (guess === secretWord) {
-            messageText.textContent = "Congratulations! You've guessed the word!";
-            if (myConfetti) {
-            myConfetti({
-                particleCount: 5000,
-                spread: 360
-            });
-            }
-            showSecretWord();
-            addGuessToHistory(guess, resultHTML);
+function updateSecretDisplay() {
+    secretDisplay.innerHTML = "";
+
+    for (let i = 0; i < secretWord.length; i++) {
+        let box = document.createElement("span");
+        box.classList.add("letter-box");
+
+        if (correctLetters[i]) {
+            box.innerHTML = correctLetters[i].toUpperCase();
+            box.classList.add("correct");
         } else {
-            messageText.textContent = "Wrong guess. Try again!";
-            addGuessToHistory(guess, resultHTML);
+            box.innerHTML = "?";
         }
+
+        secretDisplay.appendChild(box);
     }
+}
 
 function showSecretWord() {
     secretDisplay.innerHTML = "";
@@ -109,35 +97,23 @@ function showSecretWord() {
 function buildLetterFeedBack(guess) {
     let resultHTML = "";
 
-    // Create a new row for this guess
-    let guessRow = document.createElement("div");
-    guessRow.classList.add("guess-row");
-
     for (let i = 0; i < guess.length; i++) {
         let letter = guess[i];
         let cssClass = "";
-        let box = document.createElement("span");
 
         if (letter === secretWord[i]) {
             cssClass = "correct";
-            box.innerHTML = secretWord[i].toUpperCase();
-        } else if (secretWord.includes(letter)) {
+            correctLetters[i] = letter;
+        } 
+        else if (secretWord.includes(letter)) {
             cssClass = "close";
-            box.innerHTML = "?";
-        } else {
+        } 
+        else {
             cssClass = "wrong";
-            box.innerHTML = "?";
         }
-
-        box.classList.add(cssClass);
-        box.classList.add("letter-box");
-        guessRow.appendChild(box);
 
         resultHTML += `<span class="letter-box ${cssClass}">${letter.toUpperCase()}</span>`;
     }
-
-    // Add this guess underneath the previous guesses
-    guessDisplay.appendChild(guessRow);
 
     return resultHTML;
 }
@@ -187,6 +163,7 @@ function checkGuess() {
 
     tries++;
     let resultHTML = buildLetterFeedBack(guess);
+    updateSecretDisplay();
     
     if (guess === secretWord) {
         messageText.textContent = "Congratulations! You've guessed the word!";
