@@ -15,6 +15,9 @@ const messageText = document.getElementById("message-text")
 const secretDisplay = document.getElementById("secret-display")
 const guessDisplay = document.getElementById("guess-display")
 const historyTableBody = document.getElementById("history-table-body")
+const apiKeyField = document.getElementById("api-key-field");
+const saveApiKeyButton = document.getElementById("save-api-key");
+const clearApiKeyButton = document.getElementById("clear-api-key");
 
 /* start the game by selecting a random word from the list and resetting the tries */
 async function startGame() {
@@ -193,3 +196,84 @@ function checkGuess() {
         }
     }
 }
+
+function saveApiKey() {
+    const apiKey = apiKeyField.value.trim();
+    localStorage.setItem("wpiQwenApiKey", apiKey);
+    messageText.textContent = "API Key saved!";
+}
+
+function clearApiKey() {
+    apiKeyField.value = "";
+    localStorage.removeItem("wpiQwenApiKey");
+    messageText.textContent = "API Key cleared!";
+}
+
+async function askQwen(promptText) {
+    const apiKey = localStorage.getitem("wpiQwenApiKey");
+    if (!apiKey) {
+        messageText.textContent = "Please enter your API key.";
+        return;
+    }
+
+    try {
+        const response = await fetch (WPI_QWEN_MODEL, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify ({
+                model: WPI_QWEN_MODEL,
+                message: [
+                    {role: "system",
+                        content: "/no_think You are a helpful assistant \
+                        that provides hints for a 5-letter word guessing game."},
+                        {role: "user",
+                            content: promptText },
+                    
+                ],
+            
+                    temperature: 0.7,
+                    max_tokens: 200,
+                    stream: false,
+                    chat_template_kwargs: {
+                        enable_thinking: false
+                    }
+        })
+    })
+    }
+    catch (error) {
+        console.log (error)
+    }
+}
+
+async function askForHint() {
+    if (!secretWord) {
+        messageText.textContent = "Please start the game first.";
+        return;
+    }
+    const hint = "Ask Ai for a hint...";
+    messageText.textContent = hint;
+
+    const promptText = `The secret word is: ${secretWord}. \
+            Please provide one short hint for the player to guess the word.`;
+    try {
+        const aiHint = await askQwen(promptText);
+        messageText.innerHTML = `AI Hint: ${aiHint}`;
+    } catch (error) {
+        console.error("Error getting AI hint:", error);
+        messageText.textContent = "Error getting AI hint. Please check your API key.";
+    }
+}
+            
+function loadPage() {
+    guessButton.addEventListener("click", checkGuess);
+    resetButton.addEventListener("click", startGame);
+    saveApiKeyButton.addEventListener("click", saveApiKey);
+    clearApiKeyButton.addEventListener("click", clearApiKey);
+    apiKeyField.value = localStorage.getItem("wpiQwenApiKey") || "";
+    startGame();
+}
+
+loadPage();
