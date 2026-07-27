@@ -89,3 +89,14 @@ th {
 .wrong-demo {
     background-color: darkgray;
 }
+
+.small-note {
+    font-size: 14px;
+    color: #808080;
+}
+
+#api-key-field {
+    width: 320px;
+    max-width: 90%;
+    
+}

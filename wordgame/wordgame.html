@@ -23,6 +23,19 @@
         </nav>
 
         <main>
+            <section class="card">
+                <h2>AI Setup</h2>
+                <p>Paster your WPI Qwen API key here to enable AI features. 
+                    The key is saved only in this browser
+                </p>
+                <label for=""api-key_field>WPI Qwen API Key:</label>
+                <input type="password" id="api-key-field"
+                placeholder="Enter your API key">
+                <button id="save-api-key">Save API Key</button>
+                <button id="clear-api-key">Clear API Key</button>
+                <p class="small-note">Do not publish your API key on Github or share it with others.</p>
+            </section>
+
             <section class="card game-card">
                 <h2>Guess the secret word.</h2>
                 <p>Guess 5-letter word.</p>

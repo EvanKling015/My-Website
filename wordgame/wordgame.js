@@ -1,4 +1,7 @@
 //const words = ["apple", "peach", "lemon", "berry", "mango", "grape", "melon", "aahed", "aalii", "aargh", "aarti", "abuse", "abyss", "admix", "admin", "allow", "aloft", "adapt", "afore", "alone", "alive", "amaze", "agile","xenia", "zaddy", "zesty", "zilch", "zeros", "zippy", "yarco","yasss", "waddy", "water", "leche", "cream", "white", "black", "tanks" ];
+const WPI_QWEN_URL = "https://ggpt-llm-p-u02.int.wpi.edu/v1/chat/completions";
+const WPI_QWEN_MODEL = "qwen-cli";
+
 
 let secretWord = "";
 let tries = 0;
