@@ -137,14 +137,14 @@ function addGuessToHistory(guess, resultHTML) {
     let guessCell = document.createElement("td");
     guessCell.innerHTML = guess.toUpperCase();
 
-    let resultCell = document.createElement("td")
+    let resultCell = document.createElement("td");
     resultCell.innerHTML = resultHTML;
 
     row.appendChild(guessCell);
     row.appendChild(tryCell);
     row.appendChild(resultCell);
 
-    historyTableBody.appendChild(row);
+    historyTableBody.prepend(row);
 }
 
 guessButton.addEventListener("click", checkGuess);
