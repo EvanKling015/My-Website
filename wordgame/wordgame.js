@@ -156,3 +156,47 @@ guessField.addEventListener("keydown", function(event) {
 })
 
 startGame();
+
+function checkGuess() {
+    if (tries >= 6) {
+        return;
+    }
+
+    const guess = guessField.value.toLowerCase();
+    
+    // Validate word length before counting it as an official try
+    if (guess.length !== secretWord.length) {
+        messageText.textContent = "Please enter a " + secretWord.length + "-letter word.";
+        return;
+    }
+
+    tries++;
+    let resultHTML = buildLetterFeedBack(guess);
+    
+    if (guess === secretWord) {
+        messageText.textContent = "Congratulations! You've guessed the word!";
+        if (myConfetti) {
+            myConfetti({ particleCount: 150, spread: 360 });
+        }
+        showSecretWord();
+        addGuessToHistory(guess, resultHTML);
+        
+        // Disable board because they won
+        guessField.disabled = true;
+        guessButton.disabled = true;
+    } else {
+        addGuessToHistory(guess, resultHTML);
+        guessField.value = ""; // Clear the input field for their next attempt
+
+        if (tries >= 6) {
+            messageText.innerHTML = "Game over! You will now never know what the word was :)";
+            showSecretWord(); // Reveal the answers in the block display
+            
+            // Disable board because they ran out of tries
+            guessField.disabled = true;
+            guessButton.disabled = true;
+        } else {
+            messageText.textContent = "Wrong guess. Try again! (" + (6 - tries) + " guesses left)";
+        }
+    }
+}
