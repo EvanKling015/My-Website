@@ -3,24 +3,28 @@
 let secretWord = "";
 let tries = 0;
 let words;
+let correctLetters = [];
 
 const guessField = document.getElementById("guess-field")
 const guessButton = document.getElementById("guess-button")
 const resetButton = document.getElementById("reset-button")
 const messageText = document.getElementById("message-text")
 const secretDisplay = document.getElementById("secret-display")
+const guessDisplay = document.getElementById("guess-display")
 const historyTableBody = document.getElementById("history-table-body")
 
 /* start the game by selecting a random word from the list and resetting the tries */
-function startGame() {
+async function startGame() {
 
-    console.log(getExternalData());
     tries = 0;
+    correctLetters = [];
     messageText.textContent = "Guess the 5-letter secret word!";
     guessField.value = "";
     historyTableBody.innerHTML = "";
-    hideSecretWord();
-    
+    guessDisplay.innerHTML = "";
+    secretDisplay.innerHTML = "";
+
+    await getExternalData();
 }
 
 //make confetti 
@@ -34,22 +38,27 @@ if (window.confetti){
 
 async function getExternalData(){
     const url = "https://random-word-api.herokuapp.com/word?length=5";
+
     try {
         const response = await fetch(url);
-    
-    const data = await response.json();
-    secretWord = data[0];
-    hideSecretWord();
+        const wordData = await response.json();
+
+        secretWord = wordData[0];
+
+        hideSecretWord();
+
     } catch (error) {
-    console.error("Fetch failed");
+        console.error("Fetch failed", error);
     }
-    }
+}
 
 function hideSecretWord() {
     secretDisplay.innerHTML = "";
-    for (let i = 0; i < secretWord.length; i++) {
+
+    for (let i = 0; i < 5; i++) {
         let box = document.createElement("span");
         box.innerHTML = "?";
+        box.classList.add("letter-box");
         secretDisplay.appendChild(box);
     }
 }
@@ -86,10 +95,12 @@ function hideSecretWord() {
 
 function showSecretWord() {
     secretDisplay.innerHTML = "";
-    for (let i =0; i < secretWord.length; i++) {
-        let box = document.createElement("span");;
+
+    for (let i = 0; i < secretWord.length; i++) {
+        let box = document.createElement("span");
         box.innerHTML = secretWord[i].toUpperCase();
         box.classList.add("correct");
+        box.classList.add("letter-box");
         secretDisplay.appendChild(box);
     }
 }
@@ -97,33 +108,37 @@ function showSecretWord() {
 
 function buildLetterFeedBack(guess) {
     let resultHTML = "";
-    //resetting secretdisplay
-    secretDisplay.innerHTML = "";
+
+    // Create a new row for this guess
+    let guessRow = document.createElement("div");
+    guessRow.classList.add("guess-row");
+
     for (let i = 0; i < guess.length; i++) {
         let letter = guess[i];
         let cssClass = "";
+        let box = document.createElement("span");
+
         if (letter === secretWord[i]) {
             cssClass = "correct";
-            //display
-            let box = document.createElement("span");;
             box.innerHTML = secretWord[i].toUpperCase();
-            box.classList.add("correct");
-        secretDisplay.appendChild(box);
         } else if (secretWord.includes(letter)) {
             cssClass = "close";
-            //display
-            let box = document.createElement("span");
             box.innerHTML = "?";
-            secretDisplay.appendChild(box);
         } else {
             cssClass = "wrong";
-            //display
-            let box = document.createElement("span");
             box.innerHTML = "?";
-            secretDisplay.appendChild(box);
         }
+
+        box.classList.add(cssClass);
+        box.classList.add("letter-box");
+        guessRow.appendChild(box);
+
         resultHTML += `<span class="letter-box ${cssClass}">${letter.toUpperCase()}</span>`;
     }
+
+    // Add this guess underneath the previous guesses
+    guessDisplay.appendChild(guessRow);
+
     return resultHTML;
 }
 

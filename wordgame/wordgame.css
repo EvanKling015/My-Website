@@ -4,10 +4,11 @@
 #secret-display {
     margin: 20px 0;
 }
-#secret-display span {
+#secret-display span,
+#guess-display span {
     display: inline-block;
     background-color: antiquewhite;
-    border: 20px solid #0f0e0e;
+    border: 3px solid #0f0e0e;
     border-radius: 8px;
     width: 45px;
     height: 45px;
@@ -16,6 +17,11 @@
     font-size: 26px;
     font-weight: bold;
     color: black;
+    text-align: center;
+}
+
+.guess-row {
+    margin-bottom: 5px;
 }
 
 input {
