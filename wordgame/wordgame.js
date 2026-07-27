@@ -190,10 +190,8 @@ function checkGuess() {
 
         if (tries >= 6) {
             messageText.innerHTML = "Game over! You will now never know what the word was :)";
-            showSecretWord(); // Reveal the answers in the block display
             
             // Disable board because they ran out of tries
-            guessField.disabled = true;
             guessButton.disabled = true;
         } else {
             messageText.textContent = "Wrong guess. Try again! (" + (6 - tries) + " guesses left)";
