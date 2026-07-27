@@ -210,7 +210,7 @@ function clearApiKey() {
 }
 
 async function askQwen(promptText) {
-    const apiKey = localStorage.getitem("wpiQwenApiKey");
+    const apiKey = localStorage.getItem("wpiQwenApiKey");
     if (!apiKey) {
         messageText.textContent = "Please enter your API key.";
         return;
