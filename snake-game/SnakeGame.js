@@ -47,4 +47,43 @@ class SnakeGame{
         this.food.x = this.foodX;
         this.food.y = this.foodY;
     }
+    isOccupied(x, y){
+        return this.snake.snakeBody.some(([bodyX, bodyY]) = bodyX === x && bodyY === y);
+    }
+    randomPosition(){
+        return Math.floor((Math.random() * this.gridSide) + 1);
+    }
+    updateScoreBoard(){
+        this.scoreTag.innerText = `Score: ${this.score}`;
+        this.highScore.innerText = `High Score: ${this.highScore}`;
+    }
+    increaseScore(){
+        this.score++;
+        if (this.score > this.highScore){
+            this.highScore = this.score;
+            localStorage.setItem("high-score", this.highScore);
+        }
+        this.updateScoreBoard();
+    }
+    draw(){
+        let foodhtml = `<div style= background-color: ${this.food.color}:
+        grid-row: ${this.food.y} / ${this.food.x}"></div>`;
+        let snakeHtml = this.drawSnake();
+        this.canvas.innerHTML = foodHtml + snakeHtml;
+    }
+    drawSnake(){
+        let snakeHtml = "";
+        let snakeBody = this.snake.snakeBody;
+        for (let i = 0; i < snakeBody.length; i++){
+            if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] &&
+                snakeBody[0][0] === snakeBody[i][0]
+            ){
+                this.gameOver();
+                return snakeHtml;
+            }
+            snakeHtml += `<div style="background-color: ${this.snake.color};
+            grid-row: ${snakeBody[i][1]} / ${snakeBody[i][1]}"></div>`;
+        }
+        return snakeHtml;
+    }
 }
