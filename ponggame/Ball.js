@@ -33,8 +33,8 @@ class Ball {
         return this.x - this.radius < 0;
     }
     
-    ispastRightWall() {
-        return this.x - this.radius > boardWidth;
+    isPastRightWall(boardWidth) {
+        return this.x + this.radius > boardWidth;
     }
 
     bounceOffLeftPaddle(paddle) {
