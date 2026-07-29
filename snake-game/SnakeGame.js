@@ -66,8 +66,7 @@ class SnakeGame{
         this.updateScoreBoard();
     }
     draw(){
-        let foodHtml = `<div style= background-color: ${this.food.color}:
-        grid-row: ${this.food.y} / ${this.food.x}"></div>`;
+        let foodHtml = `<div style="background-color: ${this.food.color}; grid-area: ${this.food.y} / ${this.food.x}"></div>`;
         let snakeHtml = this.drawSnake();
         this.canvas.innerHTML = foodHtml + snakeHtml;
     }
@@ -81,8 +80,7 @@ class SnakeGame{
                 this.gameOver();
                 return snakeHtml;
             }
-            snakeHtml += `<div style="background-color: ${this.snake.color};
-            grid-row: ${snakeBody[i][1]} / ${snakeBody[i][1]}"></div>`;
+            snakeHtml += `<div style="background-color: ${this.snake.color}; grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
         }
         return snakeHtml;
     }
@@ -110,3 +108,6 @@ class SnakeGame{
         }
     }
 }
+window.addEventListener("DOMContentLoaded", () => {
+    new SnakeGame();
+});
