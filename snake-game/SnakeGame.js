@@ -14,7 +14,7 @@ class SnakeGame{
         this.snakeX = this.randomPosition();
         this.vx = 0;
         this.vy = 0;
-        this.snakeSpeed = 120;
+        this.snakeSpeed = 100;
 
         this.foodX = this.randomPosition();
         this.foodY = this.randomPosition();
