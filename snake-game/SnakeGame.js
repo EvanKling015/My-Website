@@ -86,4 +86,27 @@ class SnakeGame{
         }
         return snakeHtml;
     }
+    gameOver(){
+        if( this.timerId !== null){
+            clearInterval(this.timerId);
+            this.timerId = null;
+        }
+        alert("Game Over! Press OK to replay.");
+        location.reload();
+    }
+    start(){
+        this.timerId = setInterval(() => this.gameLoop(this.gridSide), this.snakeSpeed);
+    }
+    gameLoop(){
+        if (this.snake.move(side)){
+            this.gameOver();
+            return;
+        }
+        this.draw();
+        if (this.snake.headX === this.food.x && this.snake.headY === this.food.y){
+            this.placeFood();
+            this.snake.growSnake(this.food.x, this.food.y);
+            this.increaseScore();
+        }
+    }
 }
