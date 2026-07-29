@@ -3,14 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Snake Game</title>
+        <title>Pong Game</title>
         <link rel="stylesheet" href="../styles.css">
-        <link rel="stylesheet" href="snakegame.css">
+        <link rel="stylesheet" href="ponggame.css">
     </head>
     <body>
         <header>
-            <h1>Welcome to Our Snake Game Project</h1>
-            <p class="tagline">Use the Arrow Keys to move the snake and collect food!</p>
+            <h1>Welcome to Our Pong Game Project</h1>
+            <p class="tagline">Use S-W key for the left paddle.
+                Use Up-Down arrow keys for the right paddle.</p>
         </header>
         <nav>
             <ul>
@@ -19,18 +20,17 @@
                 <li><a href="../contact.html">Contact</a></li>
                 <li><a href="../numgame/numgame.html">Number Game</a></li>
                 <li><a href="../wordgame/wordgame.html">Word Game</a></li>
-                <li><a href="snakegame.html" class="active">Snake Game</a></li>
+                <li><a href="../snake-game/snakegame.html">Snake Game</a></li>
+                <li><a href="ponggame.html" class="active">Pong Game</a></li>
             </ul>
         </nav>
 
         <main>
-            <section class="snake-card">
-                <h1 id="snake-name">Snake Game</h1>
-                <div class="heading">
-                    <span id="current-score">Score: 0</span>
-                    <span id="high-score">Hight Score: 0</span>
-                </div>
-                <div id="gameboard"></div>
+            <section class="card">
+                <canvas id="gameboard" width="500" height="500">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <div id="scoreboard">0 : 0</div>
             </section>
 
         </main>
