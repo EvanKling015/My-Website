@@ -95,7 +95,7 @@ class SnakeGame{
     start(){
         this.timerId = setInterval(() => this.gameLoop(this.gridSide), this.snakeSpeed);
     }
-    gameLoop(){
+    gameLoop(side){
         if (this.snake.move(side)){
             this.gameOver();
             return;
