@@ -11,7 +11,7 @@ class SnakeGame{
         this.timerId = null;
 
         this.snakeY = this.randomPosition();
-        this.snakeX = this.randomPositino();
+        this.snakeX = this.randomPosition();
         this.vx = 0;
         this.vy = 0;
         this.snakeSpeed = 120;
@@ -48,14 +48,14 @@ class SnakeGame{
         this.food.y = this.foodY;
     }
     isOccupied(x, y){
-        return this.snake.snakeBody.some(([bodyX, bodyY]) = bodyX === x && bodyY === y);
+        return this.snake.snakeBody.some(([bodyX, bodyY]) => bodyX === x && bodyY === y);
     }
     randomPosition(){
         return Math.floor((Math.random() * this.gridSide) + 1);
     }
     updateScoreBoard(){
         this.scoreTag.innerText = `Score: ${this.score}`;
-        this.highScore.innerText = `High Score: ${this.highScore}`;
+        this.highScoreTag.innerText = `High Score: ${this.highScore}`;
     }
     increaseScore(){
         this.score++;
@@ -66,7 +66,7 @@ class SnakeGame{
         this.updateScoreBoard();
     }
     draw(){
-        let foodhtml = `<div style= background-color: ${this.food.color}:
+        let foodHtml = `<div style= background-color: ${this.food.color}:
         grid-row: ${this.food.y} / ${this.food.x}"></div>`;
         let snakeHtml = this.drawSnake();
         this.canvas.innerHTML = foodHtml + snakeHtml;
