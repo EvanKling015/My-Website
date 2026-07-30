@@ -45,8 +45,8 @@ class Ball {
         const paddleRight = paddle.x + paddle.width;
         const paddleTop = paddle.y;
         const paddleBottom = paddle.y + paddle.height;
-        if (ballleft > paddleRight) return false;
-        if (ballbottom < paddleTop) return false;
+        if (ballLeft > paddleRight) return false;
+        if (ballBottom < paddleTop) return false;
         if (ballTop > paddleBottom) return false;
 
         if (this.vx < 0) {
@@ -54,4 +54,23 @@ class Ball {
         }
         return true;
     }
+
+    bounceOffRightPaddle(paddle) {
+        const ballRight = this.x + this.radius;
+        const ballTop = this.y - this.radius;
+        const ballBottom = this.y + this.radius;
+
+        const paddleLeft = paddle.x;
+        const paddleTop = paddle.y;
+        const paddleBottom = paddle.y + paddle.height;
+        if (ballRight < paddleLeft) return false;
+        if (ballBottom < paddleTop) return false;
+        if (ballTop > paddleBottom) return false;
+
+        if (this.vx > 0) {
+            this.vx = -Math.abs(this.vx); // Bounce left
+        }
+        return true;
+    }
+
 }
