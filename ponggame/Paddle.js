@@ -10,9 +10,33 @@ class Paddle {
     }
 
     draw(context) {
+        // Black paddle
         context.fillStyle = this.color;
-        context.strokeStyle = "black";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.fillRect(
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        );
+
+        // Neon ivory glow outline
+        context.strokeStyle = "ivory";
+        context.lineWidth = 2;
+
+        context.shadowColor = "ivory";
+        context.shadowBlur = 30;
+        context.shadowOffsetX = 0;
+        context.shadowOffsetY = 0;
+
+        context.strokeRect(
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        );
+
+        // Reset glow so it doesn't affect other objects
+        context.shadowBlur = 0;
     }
 
     move() {

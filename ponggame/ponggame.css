@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "DS-Digital";
+    src: url("fonts/DS-DIGI.TTF") format("truetype");
+}
+
 body {
     text-align: center;
 }
@@ -7,15 +12,243 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
 }
 
-#scoreboard {
-    font-size: 40px;
+#reset,
+#start {
+
+    cursor: pointer;
+
+    border-radius: 15px;
+
+    width: 130px;
+
+    height: 60px;
+
     font-family: 'Courier New', Courier, monospace;
+
+    font-size: 18px;
+
+    border: 1px solid black;
+
+    box-shadow:
+        0 0 3px black;
+
 }
 
-#reset {
-    cursor: pointer;
-    border-radius: 15px;
-    width: 100px;
-    height: 50px;
-    font-family: 'Courier New', Courier, monospace;
+
+.game-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 10px;
+
+}
+
+
+canvas {
+    border: 4px solid ivory;
+    box-shadow: 0 0 10px ivory;
+}
+
+
+
+/* =========================
+   ALARM CLOCK SCORE DISPLAY
+   ========================= */
+
+#scoreboard {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 15px auto;
+
+    background: black;
+
+    width: fit-content;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    border: 2px solid ivory;
+
+    box-shadow:
+
+        0 0 6px ivory,
+
+        inset 0 0 12px black;
+
+}
+
+
+
+/* =========================
+   SEVEN SEGMENT DIGITS
+   ========================= */
+
+
+.digit {
+
+    position: relative;
+
+    width: 55px;
+
+    height: 90px;
+
+}
+
+
+
+/* inactive segments */
+
+.segment {
+
+    position: absolute;
+
+    background: #250000;
+
+    border-radius: 4px;
+
+    box-shadow:
+
+        inset 0 0 4px black;
+
+}
+
+
+
+/* horizontal segments */
+
+.segment.a,
+.segment.g,
+.segment.d {
+
+    width: 38px;
+
+    height: 8px;
+
+    left: 9px;
+
+}
+
+
+
+/* vertical segments */
+
+.segment.b,
+.segment.c,
+.segment.e,
+.segment.f {
+
+    width: 8px;
+
+    height: 38px;
+
+}
+
+
+
+/* segment positions */
+
+.segment.a {
+    top: 0;
+}
+
+.segment.b {
+    top: 7px;
+    right: 0;
+}
+
+.segment.c {
+    bottom: 7px;
+    right: 0;
+}
+
+.segment.d {
+    bottom: 0;
+}
+
+.segment.e {
+    bottom: 7px;
+    left: 0;
+}
+
+.segment.f {
+    top: 7px;
+    left: 0;
+}
+
+.segment.g {
+    top: 41px;
+}
+
+
+
+/* =========================
+   ACTIVE LED SEGMENTS
+   ========================= */
+
+.segment.active {
+
+    background: #ff1111;
+
+    box-shadow:
+
+        0 0 5px #ff1111,
+
+        0 0 12px #ff1111,
+
+        0 0 22px #ff1111,
+
+        inset 0 0 5px #ffaaaa;
+
+}
+
+
+
+/* =========================
+   COLON
+   ========================= */
+
+.score-divider {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 20px;
+
+}
+
+
+
+.dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #ff1111;
+
+    box-shadow:
+
+        0 0 5px #ff1111,
+
+        0 0 12px #ff1111,
+
+        0 0 20px #ff1111;
+
 }
