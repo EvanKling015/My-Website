@@ -4,6 +4,7 @@ class PongGame {
         this.context = this.canvas.getContext("2d");
         this.scoreBoard = document.getElementById("scoreboard");
         this.resetButton = document.getElementById("reset");
+
         //game settings
         this.boardWidth = 500;
         this.boardHeight = 500;
@@ -11,6 +12,7 @@ class PongGame {
         this.paddleHeight = 100;
         this.paddleSpeed = 5;
         this.ballRadius = 10;
+
         //set score board
         this.leftScore = 0;
         this.rightScore = 0;
@@ -20,7 +22,6 @@ class PongGame {
         this.canvas.width = this.boardWidth;
         this.canvas.height = this.boardHeight;
 
-        // this.controls = new KeyboardControls(this.leftPaddle, this.rightPaddle, this.paddleSpeed);
         this.resetButton.addEventListener("click", 
             () => this.resetGame());
 
@@ -42,7 +43,7 @@ class PongGame {
     }
 
     start() {
-        this.timerId = setInterval(() => this.gameLoop(), 10); //60 FPS
+        this.timerId = setInterval(() => this.gameLoop(), 10);
     }
 
     gameLoop() {
@@ -52,10 +53,12 @@ class PongGame {
 
     update() {
         this.leftPaddle.move();
-        this.rightPaddle.move()
+        this.rightPaddle.move();
+
         this.ball.bounceOffTopAndBottom(this.boardHeight);
         this.ball.bounceOffLeftPaddle(this.leftPaddle);
         this.ball.bounceOffRightPaddle(this.rightPaddle);
+
         this.ball.move();
         this.checkScore();
     }
@@ -94,29 +97,45 @@ class PongGame {
     }
 
     createObjects() {
+
         this.leftPaddle = new Paddle(
-            0, //x pos 
-            this.boardHeight/2 - this.paddleHeight/2, //y pos
-            this.paddleWidth, //width
-            this.paddleHeight, //height
-            "blue", //paddle color
-            this.boardHeight); //boardheight
+            15, //x position - moved away from left wall
+            this.boardHeight/2 - this.paddleHeight/2,
+            this.paddleWidth,
+            this.paddleHeight,
+            "blue",
+            this.boardHeight
+        );
+
         this.rightPaddle = new Paddle(
-            this.boardWidth - this.paddleWidth, //x pos
-            this.boardHeight/2 - this.paddleHeight/2, //y pos
-            this.paddleWidth, //width
-            this.paddleHeight, //height
-            "blue", //paddle color
-            this.boardHeight); //board height
-        this.controls = new KeyboardControls(this.leftPaddle, this.rightPaddle, this.paddleSpeed);
+            this.boardWidth - this.paddleWidth - 15, //x position - moved away from right wall
+            this.boardHeight/2 - this.paddleHeight/2,
+            this.paddleWidth,
+            this.paddleHeight,
+            "blue",
+            this.boardHeight
+        );
+
+
+        // reconnect keyboard controls
+        this.controls = new KeyboardControls(
+            this.leftPaddle,
+            this.rightPaddle,
+            this.paddleSpeed
+        );
+
+
         this.resetBall();
     }
 
     resetPaddles() {
-        this.leftPaddle.reset(this.boardHeight/2 -
-            this.paddleHeight /2);
-        this.rightPaddle.reset(this.boardHeight/2 -
-            this.paddleHeight/2);
+        this.leftPaddle.reset(
+            this.boardHeight/2 - this.paddleHeight / 2
+        );
+
+        this.rightPaddle.reset(
+            this.boardHeight/2 - this.paddleHeight / 2
+        );
     }
 
     stop() {
@@ -127,17 +146,18 @@ class PongGame {
     }
 
     resetBall() {
-        const direction = Math.random() < 0.5 ? -1 : 1; //randomly chooses x direction
-        const verticalDirection = Math.random() < 0.5 ? -1 : 1; //randomly chooses y direction
-        this.ball = new Ball(
-            this.boardWidth/2, //x pos
-            this.boardHeight/2, //y pos
-            this.ballSpeed * direction, //x velocity
-            this.ballSpeed * verticalDirection, //y velocity
-            this.ballRadius, //radius
-            "green"); //color
-    }
+        const direction = Math.random() < 0.5 ? -1 : 1;
+        const verticalDirection = Math.random() < 0.5 ? -1 : 1;
 
+        this.ball = new Ball(
+            this.boardWidth/2,
+            this.boardHeight/2,
+            this.ballSpeed * direction,
+            this.ballSpeed * verticalDirection,
+            this.ballRadius,
+            "green"
+        );
+    }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
