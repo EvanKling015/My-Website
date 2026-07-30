@@ -10,8 +10,9 @@ class Ball {
     draw(context) {
 
         context.fillStyle = this.color;
-        context.strokeStyle = black;
+        context.strokeStyle = "black";
         context.lineWidth = 2;
+        context.beginPath();
         context.arc(this.x, this.y, this.radius, 0, Math.PI *2);
         context.stroke();
         context.fill();
