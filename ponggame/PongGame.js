@@ -21,7 +21,7 @@ class PongGame {
         this.paddleWidth = 25;
         this.paddleHeight = 100;
 
-        this.paddleSpeed = 5;
+        this.paddleSpeed = 7.5;
 
         this.ballRadius = 10;
 
@@ -37,7 +37,7 @@ class PongGame {
 
         // faster ball
 
-        this.ballSpeed = 2;
+        this.ballSpeed = 4;
 
 
         this.gameStarted = false;
@@ -93,6 +93,16 @@ class PongGame {
 
         this.winnerText.innerHTML = "";
 
+        setTimeout(() => {
+
+            if (!this.startGame) {
+
+                this.ball.waiting = false;
+
+            }
+
+        }, 1000);
+
 
         this.start();
 
@@ -145,7 +155,6 @@ class PongGame {
             );
 
         }
-
     }
 
 
@@ -276,7 +285,7 @@ class PongGame {
 
             }
 
-        }, 3000);
+        }, 1000);
 
 
     }
