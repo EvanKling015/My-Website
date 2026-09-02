@@ -319,7 +319,7 @@ class PongGame {
         this.scoreBoard.innerHTML = `
 
 
-            ${this.createDigit(this.leftScore)}
+            ${this.createScoreDigits(this.leftScore)}
 
 
 
@@ -333,12 +333,23 @@ class PongGame {
 
 
 
-            ${this.createDigit(this.rightScore)}
+            ${this.createScoreDigits(this.rightScore)}
 
 
         `;
 
 
+    }
+
+
+
+
+
+    createScoreDigits(score) {
+        return String(score)
+            .split("")
+            .map((digit) => this.createDigit(Number(digit)))
+            .join("");
     }
 
 
