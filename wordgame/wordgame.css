@@ -1,19 +1,31 @@
 .game-card {
     text-align: center;
+    border-left-color: #ff4f9a;
 }
 #secret-display {
     margin: 20px 0;
 }
+
+#guess-display {
+    display: grid;
+    gap: 5px;
+    justify-content: center;
+    margin: 20px 0 26px;
+}
+
+.guess-row {
+    display: flex;
+    gap: 5px;
+}
 #secret-display span,
 #guess-display span {
     display: inline-block;
-    background-color: antiquewhite;
+    background-color: #d5ff45;
     border: 3px solid #0f0e0e;
-    border-radius: 8px;
     width: 45px;
     height: 45px;
     line-height: 45px;
-    margin: 4px;
+    margin: 0;
     font-size: 26px;
     font-weight: bold;
     color: black;
@@ -21,12 +33,13 @@
 }
 
 #secret-display .correct {
-    background-color: green;
-    color: white;
+    background-color: #35e6e6;
+    color: #071016;
 }
 
-.guess-row {
-    margin-bottom: 5px;
+.guess-row .empty {
+    background: #101923;
+    border-color: #354957;
 }
 
 input {
@@ -38,17 +51,17 @@ input {
 
 }
 button {
-    background-color: peru;
-    color: black;
-    border: none;
-    border-radius: 8%;
+    background-color: #ff4f9a;
+    color: #071016;
+    border: 2px solid #ff4f9a;
     font-size: 16px;
     padding: 10px 14px;
     margin: 6px;
     cursor: pointer;
 }
 button:hover {
-    background-color: lightblue;
+    background-color: #d5ff45;
+    border-color: #d5ff45;
 }
 #message-text {
     font-size: 20px;
@@ -60,13 +73,13 @@ table {
     margin-top: 12px;
 }
 th, td {
-    border: 1px solid purple;
+    border: 1px solid #354957;
     padding: 10px;
     text-align: center;
 }
 th {
-    background-color: #2c2b2b;
-    color: white;
+    background-color: #18333a;
+    color: #35e6e6;
 }
 
 .letter-box {
@@ -79,24 +92,13 @@ th {
 }
 .correct,
 .correct-demo {
-    background-color: green;
+    background-color: #35e6e6;
 }
 .close,
 .close-demo {
-    background-color: #c6c928;
+    background-color: #ff9d3f;
 }
 .wrong,
 .wrong-demo {
-    background-color: darkgray;
-}
-
-.small-note {
-    font-size: 14px;
-    color: #808080;
-}
-
-#api-key-field {
-    width: 320px;
-    max-width: 90%;
-    
+    background-color: #66747a;
 }

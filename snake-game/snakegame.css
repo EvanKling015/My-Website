@@ -1,17 +1,18 @@
-body{
-    text-align: center;
-    align-items: center;
-}
+body { text-align: center; }
 
 .snake-card{
-    background-color: transparent;
-    border: none;
-    width: 500px;
+    background: #101b22;
+    border: 3px solid #d5ff45;
+    width: min(500px, 100%);
     margin: 0 auto;
+    padding: 18px;
+    box-shadow: 0 0 25px rgba(213, 255, 69, .2), 8px 8px 0 #050709;
 }
 
 .heading{
-    background-color: #61a5e4;
+    background-color: #18333a;
+    border: 2px solid #35e6e6;
+    color: #d5ff45;
     width: 100%;
     padding: 20px;
     display: flex;
@@ -20,18 +21,25 @@ body{
 }
 
 #gameboard{
-    background-color: #163d63;
-    height: 500px;
+    background-color: #071016;
+    border: 2px solid #35e6e6;
+    height: auto;
+    aspect-ratio: 1;
     width: 100%;
     display: grid;
     grid-template: repeat(16, 1fr)/ repeat(16, 1fr);
 }
 
 #current-score, #high-score{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #snake-name{
-    margin: 0, auto;
+    margin: 0 auto 14px;
+    color: #ff4f9a;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 20px;
 }
+
+#gameboard div { box-shadow: 0 0 7px currentColor; }
 

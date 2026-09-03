@@ -130,7 +130,7 @@ class PongGame {
 
     clearBoard() {
 
-        this.context.fillStyle = "grey";
+        this.context.fillStyle = "#071016";
 
         this.context.fillRect(
             0,
@@ -475,7 +475,7 @@ class PongGame {
 
             this.paddleHeight,
 
-            "black",
+            "#d5ff45",
 
             this.boardHeight
 
@@ -494,7 +494,7 @@ class PongGame {
 
             this.paddleHeight,
 
-            "black",
+            "#35e6e6",
 
             this.boardHeight
 

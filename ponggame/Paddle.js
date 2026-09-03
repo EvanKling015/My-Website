@@ -19,11 +19,11 @@ class Paddle {
             this.height
         );
 
-        // Neon ivory glow outline
-        context.strokeStyle = "ivory";
+        // Neon outline matches each player's paddle color.
+        context.strokeStyle = this.color;
         context.lineWidth = 2;
 
-        context.shadowColor = "ivory";
+        context.shadowColor = this.color;
         context.shadowBlur = 30;
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;

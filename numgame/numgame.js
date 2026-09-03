@@ -1,125 +1,76 @@
-//get elements from the DOM-HTML
 const numField = document.getElementById("num-field");
 const messageText = document.getElementById("message-text");
 const guessCountText = document.getElementById("guess-count-text");
 const guessButton = document.getElementById("guess-button");
 const resetButton = document.getElementById("reset-button");
-const lagButton = document.getElementById("lag-button");
-//set min and max
-let min = 1;
-let max = 100;
-//create a number bretween min and max
-let secret;
-let maxGuess = Math.ceil(Math.log2(max-min+1));
-let guessCount = 0;
-let minpos;
-let maxpos;
 
-//create confetti object
+const min = 1;
+const max = 100;
+const maxGuess = Math.ceil(Math.log2(max - min + 1));
+let secret;
+let guessCount;
+let minPosition;
+let maxPosition;
+
 let myConfetti = null;
-if (window.confetti){
-    myConfetti = confetti.create(null, {
-        resize: true,
-        useWorker: true
-    });
+if (window.confetti) {
+    myConfetti = confetti.create(null, { resize: true, useWorker: true });
+}
+
+function showWinConfetti() {
+    if (myConfetti) myConfetti({ particleCount: 150, spread: 360 });
 }
 
 function loadGame() {
-    secret = Math.floor(Math.random()* (max-min+1)) + min;
+    secret = Math.floor(Math.random() * (max - min + 1)) + min;
     guessCount = 0;
-    messageText.textContent = "Guess a number between "+ min + " and " + max;
-    guessCountText.textContent = "Guesses: " + guessCount;
+    minPosition = min;
+    maxPosition = max;
     numField.value = "";
-    maxGuess = Math.ceil(Math.log2(max-min+1));
-    min = 1;
-    minpos = min;
-    max = 100;
-    maxpos = max;
-    
-}
-
-
-function blowUp() {
-    if (myConfetti) {
-            myConfetti({
-                particleCount: 10000,
-                spread: 360
-            });
-        }
-    if (myConfetti) {
-            myConfetti({
-                particleCount: 100000000,
-                spread: 360
-            });
-        }
+    messageText.textContent = `Guess a number between ${min} and ${max}`;
+    guessCountText.textContent = "Guesses: 0";
+    guessButton.disabled = false;
 }
 
 function makeGuess() {
-    const guess = parseInt(numField.value);
-    if (isNaN(guess)||guess>max||guess<min){
-        messageText.textContent = "Please enter a valid number between " +min+" and "+max;
+    const guess = parseInt(numField.value, 10);
+
+    if (Number.isNaN(guess) || guess > max || guess < min) {
+        messageText.textContent = `Please enter a valid number between ${min} and ${max}`;
         return;
     }
-    else if ( guessCount >= maxGuess) {
-        messageText.textContent = "You ran out of guesses, the number was " + secret +". Press reset game to play again";
+
+    if (guessCount >= maxGuess) {
+        messageText.textContent = `You ran out of guesses. The number was ${secret}. Press reset to play again.`;
         return;
     }
-    if (guess < secret){
-        minpos = guess + 1;
-    }
-    else if (guess > secret){
-        maxpos = guess - 1
-    }
+
+    if (guess < secret) minPosition = guess + 1;
+    if (guess > secret) maxPosition = guess - 1;
+
     guessCount++;
-    guessCountText.textContent = "Guesses: "+ guessCount +" of "+ maxGuess+
-    " (Next guess should be between " +minpos+" and " + maxpos+")"+
-    " (Next midpoint: "+Math.floor((minpos+maxpos)/2)+")";
+    guessCountText.textContent = `Guesses: ${guessCount} of ${maxGuess} (Next range: ${minPosition}-${maxPosition})`;
 
     if (guess === secret) {
         messageText.textContent = "Congratulations! You've guessed the number!";
-        if (myConfetti) {
-            myConfetti({
-                particleCount: 9500,
-                spread: 360
-            });
-        }
-    }
-    else if(guess === 67){
-        messageText.textContent = "KYS unfunny mf"
-        if (myConfetti) {
-            myConfetti({
-                particleCount: 300,
-                spread: 160
-            });
-        }
-        
-    }
-    else if(guess === 67){
-        messageText.textContent = "KYS unfunny mf"
-        if (myConfetti) {
-            myConfetti({
-                particleCount: 300,
-                spread: 160
-            });
-        }
-        
-    }
-    else if (guess < secret) {
+        guessButton.disabled = true;
+        showWinConfetti();
+    } else if (guess < secret) {
         messageText.textContent = "Try again! The secret number is higher.";
-    }
-    else {
+    } else {
         messageText.textContent = "Try again! The secret number is lower.";
+    }
+
+    if (guessCount >= maxGuess && guess !== secret) {
+        messageText.textContent = `Game over. The number was ${secret}. Press reset to play again.`;
+        guessButton.disabled = true;
     }
 }
 
 guessButton.addEventListener("click", makeGuess);
 resetButton.addEventListener("click", loadGame);
-lagButton.addEventListener("click", blowUp);
-
-numField.addEventListener("keydown", function(event) {
-    if (event.key === "Enter"){
-        makeGuess()
-    }
-})
+numField.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") makeGuess();
+});
 
 loadGame();
