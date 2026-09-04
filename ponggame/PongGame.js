@@ -15,13 +15,13 @@ class PongGame {
 
         // game settings
 
-        this.boardWidth = 500;
+        this.boardWidth = 540;
         this.boardHeight = 500;
 
         this.paddleWidth = 25;
         this.paddleHeight = 100;
 
-        this.paddleSpeed = 7.5;
+        this.paddleSpeed = 8;
 
         this.ballRadius = 10;
 
@@ -134,6 +134,19 @@ class PongGame {
             this.boardWidth,
             this.boardHeight
         );
+
+        this.context.save();
+        this.context.strokeStyle = "rgba(255, 79, 154, 0.65)";
+        this.context.lineWidth = 2;
+        this.context.setLineDash([8, 10]);
+
+        this.context.beginPath();
+        this.context.moveTo(10, 0);
+        this.context.lineTo(10, this.boardHeight);
+        this.context.moveTo(this.boardWidth - 10, 0);
+        this.context.lineTo(this.boardWidth - 10, this.boardHeight);
+        this.context.stroke();
+        this.context.restore();
 
     }
 
@@ -460,7 +473,7 @@ class PongGame {
 
         this.leftPaddle = new Paddle(
 
-            15,
+            30,
 
             this.boardHeight / 2 - this.paddleHeight / 2,
 
@@ -479,7 +492,7 @@ class PongGame {
 
         this.rightPaddle = new Paddle(
 
-            this.boardWidth - this.paddleWidth - 15,
+            this.boardWidth - this.paddleWidth - 30,
 
             this.boardHeight / 2 - this.paddleHeight / 2,
 
@@ -565,7 +578,7 @@ class PongGame {
         const direction =
             Math.random() < 0.5 ? -1 : 1;
         const launchAngle =
-            (Math.random() * 0.9 - 0.45) * Math.PI;
+            -(Math.random() * (Math.PI / 6) + Math.PI / 12);
         const horizontalSpeed =
             Math.cos(launchAngle) * this.ballSpeed;
         const verticalSpeed =
