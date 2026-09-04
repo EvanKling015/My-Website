@@ -83,7 +83,7 @@ h1 {
 
 
 canvas {
-    width: min(933px, calc(100vw - 290px));
+    width: min(816px, calc(100vw - 290px));
     height: auto;
     max-height: calc(100vh - 180px);
     object-fit: contain;
