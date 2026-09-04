@@ -20,12 +20,12 @@ class SnakeGame {
     }
 
     readSettings() {
-        const foodSetting = document.getElementById("food-count").value;
-        const [gridWidth, gridHeight] = document.getElementById("map-size").value.split("x").map(Number);
+        const foodSetting = document.querySelector("input[name='food-count']:checked").value;
+        const [gridWidth, gridHeight] = document.querySelector("input[name='map-size']:checked").value.split("x").map(Number);
         return {
             gridWidth,
             gridHeight,
-            snakeSpeed: Number(document.getElementById("game-speed").value),
+            snakeSpeed: Number(document.querySelector("input[name='game-speed']:checked").value),
             foodCount: foodSetting === "random" ? Math.floor(Math.random() * 5) + 1 : Number(foodSetting),
             snakeColor: document.querySelector("input[name='snake-color']:checked").value
         };
@@ -143,6 +143,11 @@ class SnakeGame {
 
     gameLoop() {
         if (this.snake.move(this.gridWidth, this.gridHeight)) {
+            this.gameOver();
+            return;
+        }
+
+        if (this.snake.hasHitBody()) {
             this.gameOver();
             return;
         }

@@ -32,6 +32,12 @@ class Snake{
     growSnake(foodX, foodY){
         this.snakeBody.push([foodX, foodY]);
     }
+
+    hasHitBody(){
+        return this.snakeBody.slice(1).some(([bodyX, bodyY]) =>
+            bodyX === this.headX && bodyY === this.headY
+        );
+    }
     changeColor(color){
         this.color = color;
     }

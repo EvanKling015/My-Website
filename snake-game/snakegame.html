@@ -32,35 +32,59 @@
                     <p class="setup-kicker">ARCADE SETTINGS</p>
                     <h2>Build Your Run</h2>
 
-                    <div class="option-group">
-                        <label for="map-size">Map size</label>
-                        <select id="map-size">
-                            <option value="9x10">Small · 9x10</option>
-                            <option value="15x17" selected>Standard · 15x17</option>
-                            <option value="21x24">Large · 21x24</option>
-                        </select>
-                    </div>
+                    <fieldset class="picker-group">
+                        <legend>Map size</legend>
+                        <div class="option-cards map-cards">
+                            <label class="option-card">
+                                <input type="radio" name="map-size" value="9x10">
+                                <span class="map-preview small-preview"></span>
+                                <strong>Small</strong><small>9 x 10</small>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="map-size" value="15x17" checked>
+                                <span class="map-preview standard-preview"></span>
+                                <strong>Standard</strong><small>15 x 17</small>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="map-size" value="21x24">
+                                <span class="map-preview large-preview"></span>
+                                <strong>Large</strong><small>21 x 24</small>
+                            </label>
+                        </div>
+                    </fieldset>
 
-                    <div class="option-group">
-                        <label for="game-speed">Speed</label>
-                        <select id="game-speed">
-                            <option value="220">Slow</option>
-                            <option value="150" selected>Normal</option>
-                            <option value="90">Fast</option>
-                        </select>
-                    </div>
+                    <fieldset class="picker-group">
+                        <legend>Speed</legend>
+                        <div class="option-cards speed-cards">
+                            <label class="option-card">
+                                <input type="radio" name="game-speed" value="220">
+                                <span class="speed-preview slow-preview"></span>
+                                <strong>Slow</strong>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="game-speed" value="150" checked>
+                                <span class="speed-preview normal-preview"></span>
+                                <strong>Normal</strong>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="game-speed" value="90">
+                                <span class="speed-preview fast-preview"></span>
+                                <strong>Fast</strong>
+                            </label>
+                        </div>
+                    </fieldset>
 
-                    <div class="option-group">
-                        <label for="food-count">Food on map</label>
-                        <select id="food-count">
-                            <option value="1">1 piece</option>
-                            <option value="2" selected>2 pieces</option>
-                            <option value="3">3 pieces</option>
-                            <option value="4">4 pieces</option>
-                            <option value="5">5 pieces</option>
-                            <option value="random">Random</option>
-                        </select>
-                    </div>
+                    <fieldset class="picker-group">
+                        <legend>Food on map</legend>
+                        <div class="option-cards food-cards">
+                            <label class="option-card"><input type="radio" name="food-count" value="1"><span class="food-preview">1</span><strong>One</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="2" checked><span class="food-preview">2</span><strong>Two</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="3"><span class="food-preview">3</span><strong>Three</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="4"><span class="food-preview">4</span><strong>Four</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="5"><span class="food-preview">5</span><strong>Five</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="random"><span class="food-preview">?</span><strong>Random</strong></label>
+                        </div>
+                    </fieldset>
 
                     <fieldset class="color-group">
                         <legend>Snake color</legend>
@@ -79,6 +103,10 @@
                         <label class="color-choice orange-choice">
                             <input type="radio" name="snake-color" value="#ff9d3f">
                             <span></span>Orange
+                        </label>
+                        <label class="color-choice white-choice">
+                            <input type="radio" name="snake-color" value="#f2f7ed">
+                            <span></span>White
                         </label>
                     </fieldset>
 
