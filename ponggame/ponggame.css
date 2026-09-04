@@ -34,18 +34,19 @@ h1 {
 
     cursor: pointer;
 
-    width: 116px;
+    width: 132px;
 
-    height: 48px;
+    height: 44px;
 
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
 
-    font-size: 18px;
+    font-size: 17px;
 
-    border: 2px solid #d5ff45;
+    border: 1px solid transparent;
 
-    box-shadow:
-        0 0 3px black;
+    box-shadow: none;
+    letter-spacing: 1px;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
 
 }
 
@@ -61,12 +62,19 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    min-width: 150px;
-    padding: 14px 10px;
-    border: 2px solid #354957;
-    background: rgba(7, 16, 22, .88);
-    box-shadow: 0 0 18px rgba(53, 230, 230, .18);
+    gap: 12px;
+    min-width: 174px;
+    padding: 18px 12px;
+    border: 1px solid rgba(53, 230, 230, .45);
+    background: linear-gradient(160deg, rgba(18, 31, 39, .96), rgba(7, 16, 22, .96));
+    box-shadow: 0 0 18px rgba(53, 230, 230, .16), inset 0 0 18px rgba(0, 0, 0, .35);
+}
+
+.hud-label {
+    color: #9aa99d;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
 }
 
 .game-buttons {
@@ -75,10 +83,36 @@ h1 {
 
     flex-direction: column;
 
-    gap: 15px;
+    gap: 10px;
 
     margin-top: 0;
 
+}
+
+#start {
+    background: #d5ff45;
+    color: #090c12;
+    border-color: #d5ff45;
+    box-shadow: 0 0 12px rgba(213, 255, 69, .25);
+}
+
+#reset {
+    background: transparent;
+    color: #35e6e6;
+    border-color: rgba(53, 230, 230, .7);
+}
+
+#start:hover,
+#reset:hover {
+    background: #35e6e6;
+    color: #090c12;
+    border-color: #35e6e6;
+    box-shadow: 0 0 14px rgba(53, 230, 230, .45);
+}
+
+#start:active,
+#reset:active {
+    transform: translateY(2px);
 }
 
 
@@ -105,23 +139,23 @@ canvas {
 
     align-items: center;
 
-    gap: 15px;
+    gap: 12px;
 
     margin: 0;
 
-    background: black;
+    background: #050709;
 
     width: fit-content;
 
-    padding: 10px 20px;
+    padding: 12px 18px;
 
-    border: 2px solid #ff4f9a;
+    border: 1px solid rgba(255, 79, 154, .65);
 
     box-shadow:
 
-        0 0 10px #ff4f9a,
+        0 0 12px rgba(255, 79, 154, .45),
 
-        inset 0 0 12px black;
+        inset 0 0 14px rgba(0, 0, 0, .9);
 
 }
 
