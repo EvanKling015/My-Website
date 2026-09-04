@@ -271,10 +271,10 @@ class Ball {
 
 
 
-    isPastLeftWall() {
+    isPastLeftWall(goalLine = 0) {
 
 
-        return this.x - this.radius < 0;
+        return this.x - this.radius < goalLine;
 
 
     }

@@ -15,8 +15,9 @@ class PongGame {
 
         // game settings
 
-        this.boardWidth = 600;
+        this.boardWidth = 700;
         this.boardHeight = 500;
+        this.goalLineOffset = 30;
 
         this.paddleWidth = 25;
         this.paddleHeight = 100;
@@ -143,10 +144,10 @@ class PongGame {
         this.context.shadowBlur = 12;
 
         this.context.beginPath();
-        this.context.moveTo(10, 0);
-        this.context.lineTo(10, this.boardHeight);
-        this.context.moveTo(this.boardWidth - 10, 0);
-        this.context.lineTo(this.boardWidth - 10, this.boardHeight);
+        this.context.moveTo(this.goalLineOffset, 0);
+        this.context.lineTo(this.goalLineOffset, this.boardHeight);
+        this.context.moveTo(this.boardWidth - this.goalLineOffset, 0);
+        this.context.lineTo(this.boardWidth - this.goalLineOffset, this.boardHeight);
         this.context.stroke();
         this.context.restore();
 
@@ -227,7 +228,7 @@ class PongGame {
     checkScore() {
 
 
-        if (this.ball.isPastLeftWall()) {
+        if (this.ball.isPastLeftWall(this.goalLineOffset)) {
 
             this.rightScore++;
 
@@ -236,7 +237,7 @@ class PongGame {
         }
 
 
-        else if (this.ball.isPastRightWall(this.boardWidth)) {
+        else if (this.ball.isPastRightWall(this.boardWidth - this.goalLineOffset)) {
 
             this.leftScore++;
 
@@ -475,7 +476,7 @@ class PongGame {
 
         this.leftPaddle = new Paddle(
 
-            30,
+            this.goalLineOffset - this.paddleWidth / 2,
 
             this.boardHeight / 2 - this.paddleHeight / 2,
 
@@ -494,7 +495,7 @@ class PongGame {
 
         this.rightPaddle = new Paddle(
 
-            this.boardWidth - this.paddleWidth - 30,
+            this.boardWidth - this.goalLineOffset - this.paddleWidth / 2,
 
             this.boardHeight / 2 - this.paddleHeight / 2,
 
