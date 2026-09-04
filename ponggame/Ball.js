@@ -223,7 +223,7 @@ class Ball {
     }
 
 
-    increaseSpeed(amount = 0.05, maximum = 8) {
+    increaseSpeed(amount = 0.025, maximum = 8) {
 
         const speed = Math.hypot(this.vx, this.vy);
 

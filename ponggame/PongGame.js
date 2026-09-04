@@ -15,7 +15,7 @@ class PongGame {
 
         // game settings
 
-        this.boardWidth = 540;
+        this.boardWidth = 600;
         this.boardHeight = 500;
 
         this.paddleWidth = 25;
@@ -136,9 +136,11 @@ class PongGame {
         );
 
         this.context.save();
-        this.context.strokeStyle = "rgba(255, 79, 154, 0.65)";
+        this.context.strokeStyle = "rgba(255, 255, 255, 0.95)";
         this.context.lineWidth = 2;
         this.context.setLineDash([8, 10]);
+        this.context.shadowColor = "white";
+        this.context.shadowBlur = 12;
 
         this.context.beginPath();
         this.context.moveTo(10, 0);
