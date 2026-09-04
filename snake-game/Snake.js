@@ -30,7 +30,12 @@ class Snake{
         this.vy = vy;
     }
     growSnake(foodX, foodY){
-        this.snakeBody.push([foodX, foodY]);
+        if (this.snakeBody.length === 1) {
+            this.snakeBody.push([this.headX - this.vx, this.headY - this.vy]);
+            return;
+        }
+        const tail = this.snakeBody[this.snakeBody.length - 1];
+        this.snakeBody.push([...tail]);
     }
 
     hasHitBody(){
