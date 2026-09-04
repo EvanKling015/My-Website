@@ -15,7 +15,7 @@ class PongGame {
 
         // game settings
 
-        this.boardWidth = 700;
+        this.boardWidth = 933;
         this.boardHeight = 500;
         this.goalLineOffset = 30;
 
