@@ -33,11 +33,14 @@ class PongGame {
 
 
         this.timerID = null;
+        this.launchTimeoutID = null;
+        this.launchToken = 0;
 
 
-        // faster ball
+        // ball speed
 
-        this.ballSpeed = 4;
+        this.ballSpeed = 3.5;
+        this.winningScore = 21;
 
 
         this.gameStarted = false;
@@ -93,15 +96,8 @@ class PongGame {
 
         this.winnerText.innerHTML = "";
 
-        setTimeout(() => {
-
-            if (!this.startGame) {
-
-                this.ball.waiting = false;
-
-            }
-
-        }, 1000);
+        this.ball.waiting = true;
+        this.scheduleLaunch(1000);
 
 
         this.start();
@@ -188,14 +184,18 @@ class PongGame {
         );
 
 
-        this.ball.bounceOffLeftPaddle(
+        const hitLeftPaddle = this.ball.bounceOffLeftPaddle(
             this.leftPaddle
         );
 
 
-        this.ball.bounceOffRightPaddle(
+        const hitRightPaddle = this.ball.bounceOffRightPaddle(
             this.rightPaddle
         );
+
+        if (hitLeftPaddle || hitRightPaddle) {
+            this.ball.increaseSpeed();
+        }
 
 
         this.ball.move();
@@ -242,7 +242,7 @@ class PongGame {
 
 
 
-        if (this.leftScore >= 15) {
+        if (this.leftScore >= this.winningScore) {
 
             this.endGame(
                 "LEFT PLAYER WINS!"
@@ -254,7 +254,7 @@ class PongGame {
 
 
 
-        if (this.rightScore >= 15) {
+        if (this.rightScore >= this.winningScore) {
 
             this.endGame(
                 "RIGHT PLAYER WINS!"
@@ -277,15 +277,7 @@ class PongGame {
 
 
 
-        setTimeout(() => {
-
-            if (!this.gameOver) {
-
-                this.ball.waiting = false;
-
-            }
-
-        }, 1000);
+        this.scheduleLaunch(500);
 
 
     }
@@ -430,6 +422,7 @@ class PongGame {
 
 
         this.stop();
+        this.cancelLaunch();
 
 
         this.leftScore = 0;
@@ -571,11 +564,12 @@ class PongGame {
 
         const direction =
             Math.random() < 0.5 ? -1 : 1;
-
-
-        const verticalDirection =
-            Math.random() < 0.5 ? -1 : 1;
-
+        const launchAngle =
+            (Math.random() * 0.9 - 0.45) * Math.PI;
+        const horizontalSpeed =
+            Math.cos(launchAngle) * this.ballSpeed;
+        const verticalSpeed =
+            Math.sin(launchAngle) * this.ballSpeed;
 
 
         this.ball = new Ball(
@@ -584,15 +578,51 @@ class PongGame {
 
             this.boardHeight / 2,
 
-            this.ballSpeed * direction,
+            Math.abs(horizontalSpeed) * direction,
 
-            this.ballSpeed * verticalDirection,
+            verticalSpeed,
 
             this.ballRadius,
 
             "HotPink"
 
         );
+
+    }
+
+
+    scheduleLaunch(delay) {
+
+        this.cancelLaunch();
+
+        const launchToken = ++this.launchToken;
+
+
+        this.launchTimeoutID = setTimeout(() => {
+
+            if (launchToken === this.launchToken && this.gameStarted && !this.gameOver) {
+
+                this.ball.waiting = false;
+                this.launchTimeoutID = null;
+
+            }
+
+        }, delay);
+
+    }
+
+
+    cancelLaunch() {
+
+        if (this.launchTimeoutID) {
+
+            clearTimeout(this.launchTimeoutID);
+            this.launchTimeoutID = null;
+
+        }
+
+
+        this.launchToken++;
 
     }
 

@@ -18,7 +18,7 @@ class Ball {
         this.previousPositions = [];
 
 
-        // used for 3 second pause after scoring
+        // Used while the ball is waiting to launch.
 
         this.waiting = false;
 
@@ -178,7 +178,7 @@ class Ball {
 
 
 
-        // don't move during 3 second reset
+        // Don't move while waiting to launch.
 
         if (this.waiting) return;
 
@@ -219,6 +219,22 @@ class Ball {
 
         this.y += this.vy;
 
+
+    }
+
+
+    increaseSpeed(amount = 0.15, maximum = 8) {
+
+        const speed = Math.hypot(this.vx, this.vy);
+
+        if (speed === 0) return;
+
+
+        const nextSpeed = Math.min(speed + amount, maximum);
+        const scale = nextSpeed / speed;
+
+        this.vx *= scale;
+        this.vy *= scale;
 
     }
 
@@ -314,6 +330,7 @@ class Ball {
 
 
             this.vx = Math.abs(this.vx);
+            this.vy += paddle.vy * 0.35;
 
 
         }
@@ -364,6 +381,7 @@ class Ball {
 
 
             this.vx = -Math.abs(this.vx);
+            this.vy += paddle.vy * 0.35;
 
 
         }
