@@ -27,11 +27,80 @@
         <main>
             <section class="snake-card">
                 <h1 id="snake-name">Snake Game</h1>
-                <div class="heading">
-                    <span id="current-score">Score: 0</span>
-                    <span id="high-score">Hight Score: 0</span>
+
+                <div id="setup-panel" class="setup-panel">
+                    <p class="setup-kicker">ARCADE SETTINGS</p>
+                    <h2>Build Your Run</h2>
+
+                    <div class="option-group">
+                        <label for="map-size">Map size</label>
+                        <select id="map-size">
+                            <option value="9x10">Small · 9x10</option>
+                            <option value="15x17" selected>Standard · 15x17</option>
+                            <option value="21x24">Large · 21x24</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="game-speed">Speed</label>
+                        <select id="game-speed">
+                            <option value="220">Slow</option>
+                            <option value="150" selected>Normal</option>
+                            <option value="90">Fast</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="food-count">Food on map</label>
+                        <select id="food-count">
+                            <option value="1">1 piece</option>
+                            <option value="2" selected>2 pieces</option>
+                            <option value="3">3 pieces</option>
+                            <option value="4">4 pieces</option>
+                            <option value="5">5 pieces</option>
+                            <option value="random">Random</option>
+                        </select>
+                    </div>
+
+                    <fieldset class="color-group">
+                        <legend>Snake color</legend>
+                        <label class="color-choice lime-choice">
+                            <input type="radio" name="snake-color" value="#9be34f" checked>
+                            <span></span>Lime
+                        </label>
+                        <label class="color-choice cyan-choice">
+                            <input type="radio" name="snake-color" value="#35e6e6">
+                            <span></span>Cyan
+                        </label>
+                        <label class="color-choice pink-choice">
+                            <input type="radio" name="snake-color" value="#ff4f9a">
+                            <span></span>Pink
+                        </label>
+                        <label class="color-choice orange-choice">
+                            <input type="radio" name="snake-color" value="#ff9d3f">
+                            <span></span>Orange
+                        </label>
+                    </fieldset>
+
+                    <button id="start-game" type="button">Start Game</button>
                 </div>
-                <div id="gameboard"></div>
+
+                <div id="game-screen" class="game-screen" hidden>
+                    <div class="heading">
+                        <span id="current-score">Score: 0</span>
+                        <span id="high-score">High Score: 0</span>
+                    </div>
+                    <div class="game-stage">
+                        <div id="gameboard"></div>
+                        <div id="game-over" class="game-over" hidden>
+                            <p class="game-over-label">RUN ENDED</p>
+                            <h2>GAME OVER</h2>
+                            <p id="final-score"></p>
+                            <button id="play-again" type="button">Play Again</button>
+                            <button id="back-to-menu" class="secondary-button" type="button">Change Settings</button>
+                        </div>
+                    </div>
+                </div>
             </section>
 
         </main>
