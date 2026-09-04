@@ -39,7 +39,7 @@ class PongGame {
 
         // ball speed
 
-        this.ballSpeed = 3.5;
+        this.ballSpeed = 2.5;
         this.winningScore = 21;
 
 

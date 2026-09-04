@@ -223,7 +223,7 @@ class Ball {
     }
 
 
-    increaseSpeed(amount = 0.15, maximum = 8) {
+    increaseSpeed(amount = 0.05, maximum = 8) {
 
         const speed = Math.hypot(this.vx, this.vy);
 
@@ -330,7 +330,7 @@ class Ball {
 
 
             this.vx = Math.abs(this.vx);
-            this.vy += paddle.vy * 0.35;
+            this.applyPaddleSpin(paddle);
 
 
         }
@@ -381,7 +381,7 @@ class Ball {
 
 
             this.vx = -Math.abs(this.vx);
-            this.vy += paddle.vy * 0.35;
+            this.applyPaddleSpin(paddle);
 
 
         }
@@ -390,6 +390,17 @@ class Ball {
 
         return true;
 
+
+    }
+
+
+    applyPaddleSpin(paddle) {
+
+        const paddleInfluence = 0.5;
+
+        this.vy =
+            this.vy * (1 - paddleInfluence) +
+            paddle.vy * paddleInfluence;
 
     }
 
