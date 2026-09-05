@@ -45,14 +45,14 @@
                         <legend>Map size</legend>
                         <div class="option-cards map-cards">
                             <label class="option-card">
+                                <input type="radio" name="map-size" value="15x17" checked>
+                                <span class="map-preview standard-preview"></span>
+                                <strong>Medium</strong><small>15 x 17</small>
+                            </label>
+                            <label class="option-card">
                                 <input type="radio" name="map-size" value="9x10">
                                 <span class="map-preview small-preview"></span>
                                 <strong>Small</strong><small>9 x 10</small>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" name="map-size" value="15x17" checked>
-                                <span class="map-preview standard-preview"></span>
-                                <strong>Standard</strong><small>15 x 17</small>
                             </label>
                             <label class="option-card">
                                 <input type="radio" name="map-size" value="21x24">
@@ -66,18 +66,18 @@
                         <legend>Speed</legend>
                         <div class="option-cards speed-cards">
                             <label class="option-card">
-                                <input type="radio" name="game-speed" value="220">
-                                <span class="speed-preview slow-preview"></span>
+                                <input type="radio" name="game-speed" value="260">
+                                <span class="speed-preview slow-preview">🐢</span>
                                 <strong>Slow</strong>
                             </label>
                             <label class="option-card">
-                                <input type="radio" name="game-speed" value="150" checked>
-                                <span class="speed-preview normal-preview"></span>
+                                <input type="radio" name="game-speed" value="190" checked>
+                                <span class="speed-preview normal-preview">🐍</span>
                                 <strong>Normal</strong>
                             </label>
                             <label class="option-card">
-                                <input type="radio" name="game-speed" value="90">
-                                <span class="speed-preview fast-preview"></span>
+                                <input type="radio" name="game-speed" value="110">
+                                <span class="speed-preview fast-preview">🐇</span>
                                 <strong>Fast</strong>
                             </label>
                         </div>
@@ -86,12 +86,27 @@
                     <fieldset class="picker-group">
                         <legend>Food on map</legend>
                         <div class="option-cards food-cards">
-                            <label class="option-card"><input type="radio" name="food-count" value="1"><span class="food-preview">1</span><strong>One</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="2" checked><span class="food-preview">2</span><strong>Two</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="3"><span class="food-preview">3</span><strong>Three</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="4"><span class="food-preview">4</span><strong>Four</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="5"><span class="food-preview">5</span><strong>Five</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="random"><span class="food-preview">?</span><strong>Random</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="1"><span class="food-preview stacked-balls">●</span><strong>1</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="3"><span class="food-preview stacked-balls">●●●</span><strong>3</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="5" checked><span class="food-preview stacked-balls">●●●●●</span><strong>5</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="10"><span class="food-preview stacked-balls ten-balls">●●●●●●●●●●</span><strong>10</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="bomb"><span class="food-preview bomb-preview">●</span><strong>Bomb</strong></label>
+                            <label class="option-card"><input type="radio" name="food-count" value="random"><span class="food-preview die-preview">⚄</span><strong>Die</strong><small>1-6 fruits</small></label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="picker-group">
+                        <legend>Fruit style</legend>
+                        <div class="option-cards fruit-cards">
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="apple" checked><span class="fruit-preview">🍎</span><strong>Apple</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="banana"><span class="fruit-preview">🍌</span><strong>Banana</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="orange"><span class="fruit-preview">🍊</span><strong>Orange</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="grapes"><span class="fruit-preview">🍇</span><strong>Grapes</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="watermelon"><span class="fruit-preview">🍉</span><strong>Melon</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="strawberry"><span class="fruit-preview">🍓</span><strong>Berry</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="cherry"><span class="fruit-preview">🍒</span><strong>Cherry</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="pineapple"><span class="fruit-preview">🍍</span><strong>Pineapple</strong></label>
+                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="bowl"><span class="fruit-preview">🍇🍎</span><strong>Fruit Bowl</strong></label>
                         </div>
                     </fieldset>
 
@@ -146,9 +161,9 @@
             <p>&copy; Learning Test Project. All rights reserved.</p>
         </footer>
         <script src="SnakeControls.js"></script>
-        <script src="Food.js"></script>
-        <script src="Snake.js"></script>
-        <script src="SnakeGame.js"></script>
+        <script src="Food.js?v=2"></script>
+        <script src="Snake.js?v=2"></script>
+        <script src="SnakeGame.js?v=3"></script>
         <!--script src="snakegame-test.js"></script!-->
     </body>
 </html>

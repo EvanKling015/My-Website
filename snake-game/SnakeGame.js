@@ -22,11 +22,18 @@ class SnakeGame {
     readSettings() {
         const foodSetting = document.querySelector("input[name='food-count']:checked").value;
         const [gridWidth, gridHeight] = document.querySelector("input[name='map-size']:checked").value.split("x").map(Number);
+        const fruitType = document.querySelector("input[name='fruit-type']:checked").value;
         return {
             gridWidth,
             gridHeight,
             snakeSpeed: Number(document.querySelector("input[name='game-speed']:checked").value),
-            foodCount: foodSetting === "random" ? Math.floor(Math.random() * 5) + 1 : Number(foodSetting),
+            foodMode: foodSetting,
+            foodCount: foodSetting === "bomb"
+                ? 1
+                : foodSetting === "random"
+                    ? Math.floor(Math.random() * 6) + 1
+                    : Number(foodSetting),
+            fruitType,
             snakeColor: document.querySelector("input[name='snake-color']:checked").value
         };
     }
@@ -38,6 +45,9 @@ class SnakeGame {
         this.gridHeight = this.settings.gridHeight;
         this.snakeSpeed = this.settings.snakeSpeed;
         this.foodCount = this.settings.foodCount;
+        this.foodMode = this.settings.foodMode;
+        this.fruitType = this.settings.fruitType;
+        this.bombTriggered = false;
         this.score = 0;
         this.gameOverState = false;
         this.setupPanel.hidden = true;
@@ -71,13 +81,32 @@ class SnakeGame {
     }
 
     placeFoods() {
-        while (this.foods.length < this.foodCount) {
-            const x = this.randomPosition(this.gridWidth);
-            const y = this.randomPosition(this.gridHeight);
-            if (!this.isOccupied(x, y) && !this.foods.some(food => food.x === x && food.y === y)) {
-                this.foods.push(new Food(x, y, "red"));
+        const freeSpaces = this.getFreeSpaces();
+        const spacesToFill = Math.min(this.foodCount - this.foods.length, freeSpaces.length);
+        for (let i = 0; i < spacesToFill; i++) {
+            const spaceIndex = Math.floor(Math.random() * freeSpaces.length);
+            const [x, y] = freeSpaces.splice(spaceIndex, 1)[0];
+            const type = this.foodMode === "bomb" && !this.bombTriggered && this.foods.length === 0 ? "bomb" : this.getFruitType();
+            this.foods.push(new Food(x, y, "red", type));
+        }
+    }
+
+    getFreeSpaces() {
+        const occupied = new Set(this.snake.snakeBody.map(([x, y]) => `${x},${y}`));
+        this.foods.forEach(food => occupied.add(`${food.x},${food.y}`));
+        const freeSpaces = [];
+        for (let y = 1; y <= this.gridHeight; y++) {
+            for (let x = 1; x <= this.gridWidth; x++) {
+                if (!occupied.has(`${x},${y}`)) freeSpaces.push([x, y]);
             }
         }
+        return freeSpaces;
+    }
+
+    getFruitType() {
+        return this.fruitType === "bowl"
+            ? ["apple", "banana", "orange", "grapes", "watermelon", "strawberry", "cherry", "pineapple"][Math.floor(Math.random() * 8)]
+            : this.fruitType;
     }
 
     isOccupied(x, y) {
@@ -104,7 +133,7 @@ class SnakeGame {
 
     draw() {
         const foodHtml = this.foods
-            .map(food => `<div class="food" style="background-color: ${food.color}; grid-area: ${food.y} / ${food.x}"></div>`)
+            .map(food => `<div class="food food-${food.type}" aria-label="${food.type}" style="background-color: ${food.color}; grid-area: ${food.y} / ${food.x}"></div>`)
             .join("");
         this.canvas.innerHTML = foodHtml + this.drawSnake();
     }
@@ -159,8 +188,15 @@ class SnakeGame {
 
         const foodIndex = this.foods.findIndex(food => food.x === this.snake.headX && food.y === this.snake.headY);
         if (foodIndex !== -1) {
+            const collectedFood = this.foods[foodIndex];
             this.snake.growSnake(this.snake.headX, this.snake.headY);
             this.foods.splice(foodIndex, 1);
+            if (collectedFood.type === "bomb") {
+                this.bombTriggered = true;
+                this.foodCount = Math.floor(Math.random() * 5) + 4;
+            } else if (this.foodMode === "random") {
+                this.foodCount = Math.floor(Math.random() * 6) + 1;
+            }
             this.placeFoods();
             this.increaseScore();
         }

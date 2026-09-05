@@ -175,14 +175,17 @@ body { text-align: center; }
 
 .speed-preview {
     display: block;
-    width: 40px;
-    height: 8px;
-    background: #35e6e6;
-    box-shadow: 0 0 7px #35e6e6;
+    width: 42px;
+    height: 30px;
+    color: #d5ff45;
+    font-size: 25px;
+    line-height: 30px;
+    text-shadow: 0 0 8px currentColor;
 }
 
-.slow-preview { opacity: .45; }
-.fast-preview { width: 52px; background: #ff4f9a; box-shadow: 0 0 7px #ff4f9a; }
+.slow-preview { color: #35e6e6; opacity: .85; }
+.normal-preview { color: #d5ff45; }
+.fast-preview { color: #ff4f9a; }
 
 .food-preview {
     display: grid;
@@ -196,6 +199,66 @@ body { text-align: center; }
     font-size: 11px;
     box-shadow: 0 0 7px rgba(239, 63, 82, .65);
 }
+
+.stacked-balls {
+    color: #ff4f5f;
+    border: 0;
+    font-size: 9px;
+    letter-spacing: -4px;
+    line-height: 23px;
+    text-shadow: 4px -5px 0 #ff4f5f, 8px 0 0 #ff4f5f, 12px -5px 0 #ff4f5f;
+}
+
+.ten-balls {
+    font-size: 6px;
+    letter-spacing: -5px;
+    text-shadow: 3px -5px 0 #ff4f5f, 6px 0 0 #ff4f5f, 9px -5px 0 #ff4f5f, 12px 0 0 #ff4f5f, 15px -5px 0 #ff4f5f, 18px 0 0 #ff4f5f, 21px -5px 0 #ff4f5f, 24px 0 0 #ff4f5f, 27px -5px 0 #ff4f5f;
+}
+
+.bomb-preview {
+    border: 0;
+    color: #ef3f52;
+    font-size: 26px;
+    line-height: 24px;
+    text-shadow: 0 0 7px rgba(239, 63, 82, .9);
+}
+
+.bomb-preview::before { content: ""; }
+.bomb-preview { color: #ef3f52; }
+.bomb-preview::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    margin: -3px 0 0 5px;
+    border-top: 2px solid #d5ff45;
+    border-right: 2px solid #d5ff45;
+    transform: rotate(-20deg);
+}
+
+.die-preview {
+    border: 0;
+    color: #ef3f52;
+    font-size: 29px;
+    line-height: 25px;
+    text-shadow: 0 0 7px rgba(239, 63, 82, .8);
+}
+
+.fruit-cards {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.fruit-preview {
+    display: block;
+    min-height: 30px;
+    font-size: 25px;
+    line-height: 30px;
+    filter: saturate(1.25) drop-shadow(0 0 4px rgba(255, 157, 63, .45));
+}
+
+.fruit-option strong { font-size: 11px; }
+
+.fruit-option small { font-size: 9px; }
 
 .color-group {
     display: grid;
@@ -295,6 +358,8 @@ body { text-align: center; }
 
 #gameboard{
     background-color: #071016;
+    background-image: linear-gradient(rgba(53, 230, 230, .2) 1px, transparent 1px), linear-gradient(90deg, rgba(53, 230, 230, .2) 1px, transparent 1px);
+    background-size: calc(100% / var(--grid-columns, 16)) calc(100% / var(--grid-rows, 16));
     border: 2px solid #35e6e6;
     height: auto;
     aspect-ratio: var(--board-ratio, 1);
@@ -357,6 +422,49 @@ body { text-align: center; }
     border: 1px solid #ff8790;
     border-radius: 48% 48% 52% 52%;
     box-shadow: 0 0 9px rgba(239, 63, 82, .8), inset -2px -2px 0 rgba(161, 25, 48, .55);
+}
+
+#gameboard > .food::before {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: clamp(12px, 2.4vw, 22px);
+    line-height: 1;
+    text-shadow: 0 0 6px rgba(255, 135, 144, .75);
+}
+
+#gameboard > .food-apple::before { content: "🍎"; }
+#gameboard > .food-banana::before { content: "🍌"; }
+#gameboard > .food-orange::before { content: "🍊"; }
+#gameboard > .food-grapes::before { content: "🍇"; }
+#gameboard > .food-watermelon::before { content: "🍉"; }
+#gameboard > .food-strawberry::before { content: "🍓"; }
+#gameboard > .food-cherry::before { content: "🍒"; }
+#gameboard > .food-pineapple::before { content: "🍍"; }
+#gameboard > .food-bomb::before {
+    content: "●";
+    color: #ef3f52;
+    font-size: clamp(17px, 3vw, 29px);
+    text-shadow: 0 0 7px rgba(239, 63, 82, .9);
+}
+
+#gameboard > .food-bomb::after {
+    content: "";
+    position: absolute;
+    width: 25%;
+    height: 25%;
+    left: 53%;
+    top: 6%;
+    border-left: 2px solid #d5ff45;
+    border-top: 2px solid #d5ff45;
+    transform: rotate(25deg);
 }
 
 #gameboard > .food::after {
