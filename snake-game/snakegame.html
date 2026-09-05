@@ -29,8 +29,17 @@
                 <h1 id="snake-name">Snake Game</h1>
 
                 <div id="setup-panel" class="setup-panel">
-                    <p class="setup-kicker">ARCADE SETTINGS</p>
-                    <h2>Build Your Run</h2>
+                    <div class="menu-header">
+                        <div>
+                            <p class="setup-kicker">ARCADE MODE</p>
+                            <h2>Choose your game</h2>
+                        </div>
+                        <div class="menu-preview" aria-hidden="true">
+                            <span class="preview-snake"></span>
+                            <span class="preview-apple"></span>
+                        </div>
+                    </div>
+                    <p class="menu-copy">Set the board, pace, food, and snake color before you play.</p>
 
                     <fieldset class="picker-group">
                         <legend>Map size</legend>
@@ -110,7 +119,7 @@
                         </label>
                     </fieldset>
 
-                    <button id="start-game" type="button">Start Game</button>
+                    <button id="start-game" type="button"><span class="play-icon">▶</span> Play</button>
                 </div>
 
                 <div id="game-screen" class="game-screen" hidden>

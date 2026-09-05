@@ -112,12 +112,17 @@ class SnakeGame {
     drawSnake() {
         let snakeHtml = "";
         const snakeBody = this.snake.snakeBody;
+        const previousBody = this.snake.previousBody;
         for (let i = 0; i < snakeBody.length; i++) {
             if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]) {
                 this.gameOver();
                 return snakeHtml;
             }
-            snakeHtml += `<div class="snake-segment ${i === 0 ? "snake-head" : "snake-body"}" style="background-color: ${this.snake.color}; grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
+            const previousSegment = previousBody[i] || snakeBody[i];
+            const offsetX = previousSegment[0] - snakeBody[i][0];
+            const offsetY = previousSegment[1] - snakeBody[i][1];
+            const startTransform = `translate(${offsetX * 100}%, ${offsetY * 100}%)`;
+            snakeHtml += `<div class="snake-segment ${i === 0 ? "snake-head" : "snake-body"}" style="--start-transform: ${startTransform}; --move-duration: ${this.snakeSpeed}ms; background-color: ${this.snake.color}; grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
         }
         return snakeHtml;
     }

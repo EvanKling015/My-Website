@@ -7,11 +7,13 @@ class Snake{
         this.color = color;
         this.snakeBody = [];
         this.snakeBody[0] = [headX, headY];
+        this.previousBody = this.snakeBody.map(segment => [...segment]);
     }
 
     move(width, height = width){
         const newY = this.headY + this.vy;
         const newX = this.headX + this.vx;
+        this.previousBody = this.snakeBody.map(segment => [...segment]);
         this.headX = newX;
         this.headY = newY;
 
