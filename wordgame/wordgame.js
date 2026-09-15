@@ -1,11 +1,42 @@
 const words = [
-    "apple", "beach", "berry", "brain", "bread", "chair", "chess",
-    "cloud", "dance", "dream", "earth", "flame", "fruit", "ghost",
-    "grape", "green", "heart", "house", "light", "lemon", "magic",
-    "melon", "money", "music", "ocean", "peach", "plant", "plane",
-    "pizza", "queen", "river", "robot", "rock", "space", "snake",
-    "sound", "storm", "table", "tiger", "toast", "train", "water",
-    "whale", "world", "zesty"
+    "about", "above", "abuse", "actor", "admit", "adopt", "adult", "after", "again", "agent",
+    "agree", "ahead", "alarm", "album", "alert", "alike", "alive", "allow", "alone", "along",
+    "among", "anger", "angle", "angry", "apart", "apple", "apply", "arena", "argue", "arise",
+    "array", "aside", "asset", "audio", "avoid", "award", "awake", "aware", "badly", "baker",
+    "bases", "basic", "beach", "beard", "beast", "being", "below", "bench", "berry", "birth",
+    "black", "blame", "blind", "block", "blood", "board", "boost", "bound", "brain", "bread",
+    "break", "bring", "brown", "build", "built", "buyer", "cabin", "cable", "carry", "catch",
+    "cause", "chair", "chess", "chief", "child", "chord", "chunk", "civic", "civil", "claim",
+    "class", "clean", "clear", "click", "clock", "close", "coach", "coast", "color", "could",
+    "count", "court", "cover", "crack", "craft", "crash", "cream", "cried", "crime", "cross",
+    "crowd", "dance", "dairy", "dream", "drill", "drink", "drive", "drown", "early", "earth",
+    "eager", "eight", "elite", "email", "empty", "enemy", "enjoy", "enter", "entry", "equal",
+    "event", "every", "exact", "exist", "extra", "faith", "false", "fiber", "field", "fifth",
+    "fight", "final", "first", "flame", "focus", "force", "frame", "frank", "fruit", "fully",
+    "giant", "ghost", "given", "glass", "globe", "grace", "grade", "grain", "grand", "grape",
+    "green", "group", "guard", "guess", "guide", "happy", "heart", "heavy", "hence", "honey",
+    "house", "human", "ideal", "image", "index", "inner", "issue", "joint", "judge", "juice",
+    "knock", "known", "label", "large", "laser", "later", "laugh", "learn", "lease", "least",
+    "leave", "legal", "level", "light", "limit", "local", "logic", "lunar", "magic", "major",
+    "maker", "match", "medal", "media", "metal", "might", "model", "money", "month", "motor",
+    "music", "noble", "noise", "north", "novel", "nurse", "ocean", "offer", "often", "order",
+    "other", "outer", "owner", "paint", "panel", "party", "peace", "peach", "phase", "phone",
+    "piece", "pilot", "pitch", "place", "plain", "plane", "plant", "point", "power", "press",
+    "price", "pride", "prime", "print", "prior", "proof", "proud", "queen", "quick", "quiet",
+    "quite", "radio", "raise", "range", "rapid", "ratio", "reach", "ready", "refer", "right",
+    "river", "robot", "rough", "round", "route", "royal", "ruler", "scale", "scene", "score",
+    "serve", "seven", "shall", "shape", "share", "sharp", "sheep", "sheet", "shelf", "shift",
+    "shine", "shock", "shore", "short", "shown", "sight", "since", "skill", "sleep", "slide",
+    "small", "smart", "smile", "smith", "smoke", "solid", "solve", "sound", "south", "space",
+    "speed", "spend", "split", "sport", "staff", "stage", "stand", "start", "state", "steam",
+    "steel", "stick", "still", "stock", "stone", "store", "storm", "story", "study", "stuff",
+    "style", "suite", "table", "taken", "teach", "teeth", "tempo", "thank", "theft", "their",
+    "theme", "there", "these", "thick", "thing", "think", "third", "those", "three", "throw",
+    "tiger", "title", "toast", "total", "touch", "track", "trade", "train", "treat", "trial",
+    "trick", "truck", "trust", "truth", "under", "union", "until", "upper", "value", "video",
+    "visit", "vital", "voice", "waste", "watch", "water", "while", "white", "whole", "whose",
+    "woman", "women", "world", "worry", "worse", "would", "write", "wrong", "young", "youth",
+    "zesty"
 ];
 
 const WORD_LENGTH = 5;
@@ -151,14 +182,19 @@ function renderKeyboard() {
 }
 
 function updateKeyboardState(guess, statuses) {
-    statuses.forEach((status, index) => {
+    const currentLetterStates = {};
+
+    for (let index = 0; index < guess.length; index++) {
         const letter = guess[index];
-        const current = keyboardState[letter];
+        const status = statuses[index];
+        const existing = keyboardState[letter];
         const priority = { wrong: 0, close: 1, correct: 2 };
 
-        if (!current || priority[status] > priority[current]) {
-            keyboardState[letter] = status;
-        }
+        currentLetterStates[letter] = (!existing || priority[status] > priority[existing]) ? status : existing;
+    }
+
+    Object.entries(currentLetterStates).forEach(([letter, status]) => {
+        keyboardState[letter] = status;
     });
 
     renderKeyboard();
@@ -240,6 +276,17 @@ function submitGuess() {
 
     messageText.textContent = `Guess ${tries} of ${MAX_GUESSES}.`;
     guessField.focus();
+}
+
+function applyGuessToBoard(guess, statuses) {
+    const rowIndex = tries;
+    for (let index = 0; index < guess.length; index++) {
+        const letter = guess[index];
+        const status = statuses[index];
+        board[rowIndex][index] = letter;
+        evaluationBoard[rowIndex][index] = status;
+    }
+    renderBoard();
 }
 
 function renderSummary() {
