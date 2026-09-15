@@ -91,22 +91,14 @@ class SnakeGame {
     }
 
     triggerBombBurst() {
-        const boardCapacity = this.gridWidth * this.gridHeight - this.snake.snakeBody.length;
-        let remainingSpace = Math.max(0, boardCapacity - this.foods.length);
+        const freeSpaces = this.getFreeSpaces();
+        if (freeSpaces.length === 0) return;
 
-        while (remainingSpace > 0) {
-            const freeSpaces = this.getFreeSpaces();
-            if (freeSpaces.length === 0) break;
-
-            const spawnCount = Math.min(4, remainingSpace, freeSpaces.length);
-            for (let i = 0; i < spawnCount; i++) {
-                const spaceIndex = Math.floor(Math.random() * freeSpaces.length);
-                const [x, y] = freeSpaces.splice(spaceIndex, 1)[0];
-                this.foods.push(new Food(x, y, "red", this.getFruitType()));
-            }
-
-            remainingSpace -= spawnCount;
-            if (spawnCount < 4) break;
+        const burstCount = Math.min(4, freeSpaces.length);
+        for (let i = 0; i < burstCount; i++) {
+            const spaceIndex = Math.floor(Math.random() * freeSpaces.length);
+            const [x, y] = freeSpaces.splice(spaceIndex, 1)[0];
+            this.foods.push(new Food(x, y, "red", this.getFruitType()));
         }
     }
 
@@ -212,7 +204,6 @@ class SnakeGame {
             this.foods.splice(foodIndex, 1);
 
             if (this.foodMode === "bomb") {
-                this.bombTriggered = true;
                 this.triggerBombBurst();
             } else if (this.foodMode === "random") {
                 this.foodCount = Math.floor(Math.random() * 6) + 1;
