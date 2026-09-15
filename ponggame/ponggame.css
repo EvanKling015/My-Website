@@ -70,11 +70,65 @@ h1 {
     box-shadow: 0 0 18px rgba(53, 230, 230, .16), inset 0 0 18px rgba(0, 0, 0, .35);
 }
 
+.mode-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
 .hud-label {
     color: #9aa99d;
     font-family: 'Press Start 2P', 'Courier New', monospace;
     font-size: 10px;
     letter-spacing: 1px;
+}
+
+.secondary-label {
+    margin-top: 6px;
+}
+
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.mode-option,
+.difficulty-option {
+    cursor: pointer;
+    background: transparent;
+    color: #35e6e6;
+    border: 1px solid rgba(53, 230, 230, .7);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: .6px;
+    transition: all .12s ease;
+}
+
+.mode-option.active,
+.difficulty-option.active {
+    background: #d5ff45;
+    border-color: #d5ff45;
+    color: #070b12;
+    box-shadow: 0 0 10px rgba(213, 255, 69, .25);
+}
+
+.difficulty-panel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: opacity .15s ease;
+}
+
+.difficulty-panel.hidden {
+    display: none;
 }
 
 .game-buttons {

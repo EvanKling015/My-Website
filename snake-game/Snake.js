@@ -28,6 +28,11 @@ class Snake{
         return false;
     }
     changeDirection(vx, vy){
+        const isOpposite = (this.vx !== 0 || this.vy !== 0) &&
+            this.vx === -vx && this.vy === -vy;
+
+        if (isOpposite) return;
+
         this.vx = vx;
         this.vy = vy;
     }

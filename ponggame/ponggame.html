@@ -20,8 +20,7 @@
     <h1>Pong: First to 21 Wins</h1>
 
     <p class="tagline">
-        Use S-W key for the left paddle.
-        Use Up-Down arrow keys for the right paddle.
+        Pick a match type, then start the rally.
     </p>
 
 </header>
@@ -67,6 +66,25 @@
 
 
     <div class="game-hud">
+
+    <div class="mode-menu">
+        <div class="hud-label">MATCH TYPE</div>
+
+        <div class="option-group mode-group">
+            <button class="mode-option active" data-mode="vs-player">Vs Player</button>
+            <button class="mode-option" data-mode="vs-ai">Vs AI</button>
+        </div>
+
+        <div id="difficulty-panel" class="difficulty-panel">
+            <div class="hud-label secondary-label">DIFFICULTY</div>
+
+            <div class="option-group difficulty-group">
+                <button class="difficulty-option" data-difficulty="easy">Easy</button>
+                <button class="difficulty-option active" data-difficulty="medium">Medium</button>
+                <button class="difficulty-option" data-difficulty="hard">Hard</button>
+            </div>
+        </div>
+    </div>
 
     <div class="hud-label">SCORE</div>
 

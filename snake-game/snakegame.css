@@ -245,14 +245,20 @@ body { text-align: center; }
 }
 
 .fruit-cards {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    align-items: stretch;
+}
+
+.fruit-option {
+    min-width: 0;
+    padding: 8px 4px;
 }
 
 .fruit-preview {
     display: block;
-    min-height: 30px;
-    font-size: 25px;
-    line-height: 30px;
+    min-height: 24px;
+    font-size: 19px;
+    line-height: 24px;
     filter: saturate(1.25) drop-shadow(0 0 4px rgba(255, 157, 63, .45));
 }
 
@@ -396,6 +402,7 @@ body { text-align: center; }
 
 #gameboard > .snake-segment {
     animation: snake-slide var(--move-duration, 150ms) linear both;
+    transition: transform 120ms linear;
     will-change: transform;
 }
 

@@ -8,17 +8,32 @@ const words = [
     "whale", "world", "zesty"
 ];
 
+const WORD_LENGTH = 5;
+const MAX_GUESSES = 6;
+const summaryKeyOrder = ["1", "2", "3", "4", "5", "6", "incorrect"];
+
 let secretWord = "";
 let tries = 0;
-let correctLetters = [];
+let currentGuess = "";
+let board = Array.from({ length: MAX_GUESSES }, () => Array(WORD_LENGTH).fill(""));
+let evaluationBoard = Array.from({ length: MAX_GUESSES }, () => Array(WORD_LENGTH).fill(""));
+let keyboardState = {};
+let totalGames = 0;
+let roundSummary = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    incorrect: 0
+};
 
 const guessField = document.getElementById("guess-field");
-const guessButton = document.getElementById("guess-button");
-const resetButton = document.getElementById("reset-button");
-const messageText = document.getElementById("message-text");
-const secretDisplay = document.getElementById("secret-display");
 const guessDisplay = document.getElementById("guess-display");
-const historyTableBody = document.getElementById("history-table-body");
+const messageText = document.getElementById("message-text");
+const roundSummaryEl = document.getElementById("round-summary");
+const keyboardEl = document.getElementById("keyboard");
 
 let myConfetti = null;
 if (window.confetti) {
@@ -28,134 +43,241 @@ if (window.confetti) {
 function startGame() {
     secretWord = words[Math.floor(Math.random() * words.length)];
     tries = 0;
-    correctLetters = [];
-    messageText.textContent = "Guess the 5-letter secret word!";
+    currentGuess = "";
+    board = Array.from({ length: MAX_GUESSES }, () => Array(WORD_LENGTH).fill(""));
+    evaluationBoard = Array.from({ length: MAX_GUESSES }, () => Array(WORD_LENGTH).fill(""));
+    keyboardState = {};
+    messageText.textContent = "Guess the hidden word.";
     guessField.value = "";
-    guessButton.disabled = false;
-    historyTableBody.innerHTML = "";
-    renderGuessRows();
-    hideSecretWord();
+    renderBoard();
+    renderKeyboard();
+    renderSummary();
+    guessField.focus();
 }
 
-function renderGuessRows() {
+function renderBoard() {
     guessDisplay.innerHTML = "";
 
-    for (let rowNumber = 0; rowNumber < 6; rowNumber++) {
+    for (let rowIndex = 0; rowIndex < MAX_GUESSES; rowIndex++) {
         const row = document.createElement("div");
         row.className = "guess-row";
 
-        for (let letterNumber = 0; letterNumber < 5; letterNumber++) {
-            const box = document.createElement("span");
-            box.className = "letter-box empty";
-            row.appendChild(box);
+        for (let letterIndex = 0; letterIndex < WORD_LENGTH; letterIndex++) {
+            const cell = document.createElement("span");
+            const letter = board[rowIndex][letterIndex];
+            const status = evaluationBoard[rowIndex][letterIndex];
+
+            cell.className = "letter-box";
+
+            if (letter) {
+                cell.textContent = letter.toUpperCase();
+                cell.classList.add("filled");
+            }
+
+            if (status) {
+                cell.classList.add(status);
+            }
+
+            if (rowIndex === tries && letterIndex < currentGuess.length) {
+                cell.textContent = currentGuess[letterIndex].toUpperCase();
+                cell.classList.add("filled");
+            }
+
+            row.appendChild(cell);
         }
 
         guessDisplay.appendChild(row);
     }
 }
 
-function hideSecretWord() {
-    secretDisplay.innerHTML = "";
+function getLetterStatus(guess) {
+    const result = Array(WORD_LENGTH).fill("wrong");
+    const remainingCounts = {};
 
-    for (let letterNumber = 0; letterNumber < 5; letterNumber++) {
-        const box = document.createElement("span");
-        box.textContent = "?";
-        box.className = "letter-box";
-        secretDisplay.appendChild(box);
-    }
-}
-
-function updateSecretDisplay() {
-    secretDisplay.innerHTML = "";
-
-    for (let letterNumber = 0; letterNumber < secretWord.length; letterNumber++) {
-        const box = document.createElement("span");
-        box.className = "letter-box";
-        box.textContent = correctLetters[letterNumber]?.toUpperCase() || "?";
-
-        if (correctLetters[letterNumber]) {
-            box.classList.add("correct");
+    for (let i = 0; i < WORD_LENGTH; i++) {
+        if (guess[i] === secretWord[i]) {
+            result[i] = "correct";
+        } else {
+            remainingCounts[secretWord[i]] = (remainingCounts[secretWord[i]] || 0) + 1;
         }
-
-        secretDisplay.appendChild(box);
     }
-}
 
-function showSecretWord() {
-    secretDisplay.innerHTML = "";
-
-    for (const letter of secretWord) {
-        const box = document.createElement("span");
-        box.textContent = letter.toUpperCase();
-        box.className = "correct letter-box";
-        secretDisplay.appendChild(box);
-    }
-}
-
-function buildLetterFeedBack(guess) {
-    let resultHTML = "";
-
-    for (let letterNumber = 0; letterNumber < guess.length; letterNumber++) {
-        const letter = guess[letterNumber];
-        let cssClass = "wrong";
-
-        if (letter === secretWord[letterNumber]) {
-            cssClass = "correct";
-            correctLetters[letterNumber] = letter;
-        } else if (secretWord.includes(letter)) {
-            cssClass = "close";
+    for (let i = 0; i < WORD_LENGTH; i++) {
+        if (result[i] === "correct") continue;
+        const letter = guess[i];
+        if ((remainingCounts[letter] || 0) > 0) {
+            result[i] = "close";
+            remainingCounts[letter]--;
         }
-
-        resultHTML += `<span class="letter-box ${cssClass}">${letter.toUpperCase()}</span>`;
     }
 
-    return resultHTML;
+    return result;
 }
 
-function addGuessToBoard(resultHTML) {
-    guessDisplay.children[tries - 1].innerHTML = resultHTML;
+function renderKeyboard() {
+    const rows = [
+        ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+        ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+        ["enter", "z", "x", "c", "v", "b", "n", "m", "backspace"]
+    ];
+
+    keyboardEl.innerHTML = "";
+
+    rows.forEach((row) => {
+        const rowEl = document.createElement("div");
+        rowEl.className = "keyboard-row";
+
+        row.forEach((key) => {
+            const keyButton = document.createElement("button");
+            keyButton.type = "button";
+            keyButton.className = "key";
+            const keyText = key === "enter" ? "ENTER" : key === "backspace" ? "⌫" : key.toUpperCase();
+            keyButton.textContent = keyText;
+
+            if (key === "enter" || key === "backspace") {
+                keyButton.classList.add("wide");
+            }
+
+            if (keyboardState[key]) {
+                keyButton.classList.add(keyboardState[key]);
+            }
+
+            keyButton.addEventListener("click", () => handleKeyboardInput(key));
+            rowEl.appendChild(keyButton);
+        });
+
+        keyboardEl.appendChild(rowEl);
+    });
 }
 
-function addGuessToHistory(guess, resultHTML) {
-    const row = document.createElement("tr");
-    row.innerHTML = `<td>${guess.toUpperCase()}</td><td>${tries}</td><td>${resultHTML}</td>`;
-    historyTableBody.prepend(row);
+function updateKeyboardState(guess, statuses) {
+    statuses.forEach((status, index) => {
+        const letter = guess[index];
+        const current = keyboardState[letter];
+        const priority = { wrong: 0, close: 1, correct: 2 };
+
+        if (!current || priority[status] > priority[current]) {
+            keyboardState[letter] = status;
+        }
+    });
+
+    renderKeyboard();
 }
 
-function checkGuess() {
-    if (tries >= 6) return;
+function addLetter(letter) {
+    if (currentGuess.length >= WORD_LENGTH) return;
+    currentGuess += letter.toLowerCase();
+    renderBoard();
+}
 
-    const guess = guessField.value.trim().toLowerCase();
-    if (guess.length !== secretWord.length) {
-        messageText.textContent = `Please enter a ${secretWord.length}-letter word.`;
+function removeLetter() {
+    currentGuess = currentGuess.slice(0, -1);
+    renderBoard();
+}
+
+function handleKeyboardInput(key) {
+    const normalizedKey = key.toLowerCase();
+
+    if (normalizedKey === "enter") {
+        submitGuess();
         return;
     }
 
-    tries++;
-    const resultHTML = buildLetterFeedBack(guess);
-    addGuessToBoard(resultHTML);
-    addGuessToHistory(guess, resultHTML);
-    updateSecretDisplay();
+    if (normalizedKey === "backspace") {
+        removeLetter();
+        return;
+    }
 
-    if (guess === secretWord) {
-        messageText.textContent = "Congratulations! You've guessed the word!";
-        showSecretWord();
-        guessButton.disabled = true;
-        if (myConfetti) myConfetti({ particleCount: 150, spread: 360 });
-    } else if (tries >= 6) {
-        messageText.textContent = `Game over! The word was ${secretWord.toUpperCase()}.`;
-        showSecretWord();
-        guessButton.disabled = true;
-    } else {
-        messageText.textContent = `Wrong guess. Try again! (${6 - tries} guesses left)`;
-        guessField.value = "";
+    if (/^[a-z]$/.test(normalizedKey)) {
+        addLetter(normalizedKey);
     }
 }
 
-guessButton.addEventListener("click", checkGuess);
-resetButton.addEventListener("click", startGame);
-guessField.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") checkGuess();
+function submitGuess() {
+    if (tries >= MAX_GUESSES) return;
+
+    const guess = currentGuess.toLowerCase();
+
+    if (guess.length !== WORD_LENGTH) {
+        messageText.textContent = `Enter a ${WORD_LENGTH}-letter word.`;
+        return;
+    }
+
+    if (!words.includes(guess)) {
+        messageText.textContent = "Not in the word list.";
+        return;
+    }
+
+    const statuses = getLetterStatus(guess);
+    board[tries] = guess.split("");
+    evaluationBoard[tries] = statuses;
+
+    updateKeyboardState(guess, statuses);
+    tries += 1;
+    currentGuess = "";
+    renderBoard();
+
+    if (guess === secretWord) {
+        totalGames += 1;
+        roundSummary[tries] += 1;
+        messageText.textContent = `You got it in ${tries} guess${tries === 1 ? "" : "es"}!`;
+        renderSummary();
+        if (myConfetti) {
+            myConfetti({ particleCount: 150, spread: 360 });
+        }
+        guessField.blur();
+        return;
+    }
+
+    if (tries >= MAX_GUESSES) {
+        totalGames += 1;
+        roundSummary.incorrect += 1;
+        messageText.textContent = `No more guesses. The word was ${secretWord.toUpperCase()}.`;
+        renderSummary();
+        guessField.blur();
+        return;
+    }
+
+    messageText.textContent = `Guess ${tries} of ${MAX_GUESSES}.`;
+    guessField.focus();
+}
+
+function renderSummary() {
+    const rows = summaryKeyOrder.map((key) => {
+        const label = key === "incorrect" ? "Incorrect" : `Guess ${key}`;
+        const value = roundSummary[key] || 0;
+        const percent = totalGames === 0 ? 0 : Math.round((value / totalGames) * 100);
+        return `
+            <div class="summary-row">
+                <span class="summary-percent">${percent}%</span>
+                <span class="summary-label">${label}</span>
+                <span class="summary-count">${value}</span>
+            </div>
+        `;
+    }).join("");
+
+    roundSummaryEl.innerHTML = rows;
+}
+
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    if (key === "Enter") {
+        event.preventDefault();
+        submitGuess();
+        return;
+    }
+
+    if (key === "Backspace") {
+        event.preventDefault();
+        removeLetter();
+        return;
+    }
+
+    if (/^[a-zA-Z]$/.test(key)) {
+        event.preventDefault();
+        handleKeyboardInput(key);
+    }
 });
 
 startGame();

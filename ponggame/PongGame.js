@@ -46,6 +46,33 @@ class PongGame {
 
         this.gameStarted = false;
         this.gameOver = false;
+        this.gameMode = "vs-player";
+        this.aiDifficulty = "medium";
+        this.aiEnabled = false;
+
+        this.aiDifficultySettings = {
+            easy: {
+                responseRate: 0.68,
+                stopDistance: 24,
+                aimError: 28,
+                chaseThreshold: 0.55,
+                lookAhead: 0.15
+            },
+            medium: {
+                responseRate: 0.9,
+                stopDistance: 14,
+                aimError: 16,
+                chaseThreshold: 0.35,
+                lookAhead: 0.32
+            },
+            hard: {
+                responseRate: 1.08,
+                stopDistance: 6,
+                aimError: 7,
+                chaseThreshold: 0.2,
+                lookAhead: 0.5
+            }
+        };
 
 
         this.canvas.width = this.boardWidth;
@@ -66,7 +93,13 @@ class PongGame {
 
 
 
+        this.modeButtons = document.querySelectorAll(".mode-option");
+        this.difficultyButtons = document.querySelectorAll(".difficulty-option");
+        this.difficultyPanel = document.getElementById("difficulty-panel");
+
         this.createObjects();
+        this.bindHudControls();
+        this.updateModeSelection();
 
         this.updateScore();
 
@@ -78,10 +111,69 @@ class PongGame {
 
 
 
+    bindHudControls() {
+
+        this.modeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.gameMode = button.dataset.mode;
+                this.aiEnabled = this.gameMode === "vs-ai";
+
+                if (this.controls) {
+                    this.controls.aiEnabled = this.aiEnabled;
+                }
+
+                this.updateModeSelection();
+
+                if (!this.gameStarted) {
+                    this.rightPaddle.stop();
+                }
+            });
+        });
+
+        this.difficultyButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.aiDifficulty = button.dataset.difficulty;
+                this.updateDifficultySelection();
+            });
+        });
+
+    }
+
+
+
+    updateModeSelection() {
+
+        this.modeButtons.forEach((button) => {
+            const isActive = button.dataset.mode === this.gameMode;
+            button.classList.toggle("active", isActive);
+        });
+
+        this.difficultyPanel.classList.toggle("hidden", this.gameMode !== "vs-ai");
+
+    }
+
+
+
+    updateDifficultySelection() {
+
+        this.difficultyButtons.forEach((button) => {
+            const isActive = button.dataset.difficulty === this.aiDifficulty;
+            button.classList.toggle("active", isActive);
+        });
+
+    }
+
+
+
     startGame() {
 
         if (this.gameStarted) return;
 
+        this.aiEnabled = this.gameMode === "vs-ai";
+
+        if (this.controls) {
+            this.controls.aiEnabled = this.aiEnabled;
+        }
 
         if (this.gameOver) {
 
@@ -176,7 +268,7 @@ class PongGame {
     update() {
 
         this.leftPaddle.move();
-
+        this.updateAI();
         this.rightPaddle.move();
 
 
@@ -207,6 +299,40 @@ class PongGame {
     }
 
 
+
+
+
+    updateAI() {
+
+        if (!this.aiEnabled || this.gameMode !== "vs-ai") return;
+
+        const settings = this.aiDifficultySettings[this.aiDifficulty] ?? this.aiDifficultySettings.medium;
+        const paddleCenter = this.rightPaddle.y + this.rightPaddle.height / 2;
+        const targetY = this.ball.y + this.ball.vy * settings.lookAhead * 12;
+        const chaseThreshold = this.boardWidth * settings.chaseThreshold;
+
+        if (this.ball.x < chaseThreshold && this.ball.vx < 0) {
+            this.rightPaddle.stop();
+            return;
+        }
+
+        const noisyTarget = targetY + (Math.random() - 0.5) * settings.aimError;
+        const delta = noisyTarget - paddleCenter;
+        const preferredSpeed = this.paddleSpeed * settings.responseRate;
+
+        if (Math.abs(delta) < settings.stopDistance) {
+            this.rightPaddle.stop();
+            return;
+        }
+
+        if (delta < 0) {
+            this.rightPaddle.moveUp(preferredSpeed);
+        }
+        else {
+            this.rightPaddle.moveDown(preferredSpeed);
+        }
+
+    }
 
 
 
@@ -438,6 +564,11 @@ class PongGame {
 
         this.winnerText.innerHTML = "";
 
+        this.aiEnabled = this.gameMode === "vs-ai";
+
+        if (this.controls) {
+            this.controls.aiEnabled = this.aiEnabled;
+        }
 
         this.updateScore();
 
@@ -503,9 +634,14 @@ class PongGame {
 
             this.rightPaddle,
 
-            this.paddleSpeed
+            this.paddleSpeed,
+
+            this.aiEnabled
 
         );
+
+        this.updateModeSelection();
+        this.updateDifficultySelection();
 
 
 

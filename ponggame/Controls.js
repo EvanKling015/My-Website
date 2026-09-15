@@ -1,8 +1,9 @@
 class KeyboardControls {
-    constructor(leftPaddle, rightPaddle, speed) {
+    constructor(leftPaddle, rightPaddle, speed, aiEnabled = false) {
         this.leftPaddle = leftPaddle;
         this.rightPaddle = rightPaddle;
         this.speed = speed;
+        this.aiEnabled = aiEnabled;
         this.UP_ARROW = "ArrowUp";
         this.DOWN_ARROW = "ArrowDown";
         this.W_KEY = "w";
@@ -24,6 +25,11 @@ class KeyboardControls {
     }
 
     handleKeyDown(event) {
+        if (this.aiEnabled &&
+            (event.key === this.UP_ARROW || event.key === this.DOWN_ARROW)) {
+            return;
+        }
+
         switch (event.key) {
 
             case this.UP_ARROW:
@@ -51,6 +57,11 @@ class KeyboardControls {
     }
 
     handleKeyUp(event) {
+        if (this.aiEnabled &&
+            (event.key === this.UP_ARROW || event.key === this.DOWN_ARROW)) {
+            return;
+        }
+
         switch (event.key) {
             case this.UP_ARROW:
             case this.DOWN_ARROW:

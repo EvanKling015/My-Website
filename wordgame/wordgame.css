@@ -1,104 +1,188 @@
 .game-card {
     text-align: center;
     border-left-color: #ff4f9a;
+    padding: 18px 12px;
 }
-#secret-display {
-    margin: 20px 0;
+
+.wordle-shell {
+    max-width: 520px;
+    margin: 0 auto;
 }
 
 #guess-display {
     display: grid;
-    gap: 5px;
+    gap: 6px;
     justify-content: center;
-    margin: 20px 0 26px;
+    margin: 10px 0 18px;
 }
 
 .guess-row {
     display: flex;
-    gap: 5px;
-}
-#secret-display span,
-#guess-display span {
-    display: inline-block;
-    background-color: #d5ff45;
-    border: 3px solid #0f0e0e;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    margin: 0;
-    font-size: 26px;
-    font-weight: bold;
-    color: black;
-    text-align: center;
+    gap: 6px;
 }
 
-#secret-display .correct {
-    background-color: #35e6e6;
-    color: #071016;
-}
-
-.guess-row .empty {
+.guess-row .letter-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: 2px solid #4a5862;
+    border-radius: 8px;
     background: #101923;
-    border-color: #354957;
-}
-
-input {
-    font-size: 18px;
-    padding: 8px;
-    width: 140px;
-    margin: 8px;
+    color: #f2f7ed;
+    font-size: 1.5rem;
+    font-weight: 700;
     text-transform: uppercase;
-
+    box-sizing: border-box;
 }
-button {
-    background-color: #ff4f9a;
+
+.guess-row .letter-box.filled {
+    border-color: #6f7d88;
+    background: #1a2631;
+}
+
+.guess-row .letter-box.correct {
+    background: #35e6e6;
+    border-color: #35e6e6;
     color: #071016;
-    border: 2px solid #ff4f9a;
-    font-size: 16px;
-    padding: 10px 14px;
-    margin: 6px;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #d5ff45;
-    border-color: #d5ff45;
-}
-#message-text {
-    font-size: 20px;
-    font-weight: bold;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 12px;
-}
-th, td {
-    border: 1px solid #354957;
-    padding: 10px;
-    text-align: center;
-}
-th {
-    background-color: #18333a;
-    color: #35e6e6;
 }
 
-.letter-box {
-    display: inline-block;
+.guess-row .letter-box.close {
+    background: #ff9d3f;
+    border-color: #ff9d3f;
+    color: #071016;
+}
+
+.guess-row .letter-box.wrong {
+    background: #66747a;
+    border-color: #66747a;
+    color: #f2f7ed;
+}
+
+#message-text {
+    min-height: 24px;
+    margin: 12px 0 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #d5ff45;
+}
+
+#guess-field {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.keyboard-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.key {
+    min-width: 28px;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid #4a5862;
     border-radius: 6px;
-    padding: 8px 11px;
-    margin: 2px;
-    font-weight: bold;
-    color: black;
+    background: #1d2a35;
+    color: #f2f7ed;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform .08s ease, background .12s ease, border-color .12s ease;
 }
-.correct,
-.correct-demo {
-    background-color: #35e6e6;
+
+.key:hover {
+    transform: translateY(-1px);
+    border-color: #35e6e6;
 }
-.close,
-.close-demo {
-    background-color: #ff9d3f;
+
+.key.wide {
+    min-width: 56px;
 }
-.wrong,
-.wrong-demo {
-    background-color: #66747a;
+
+.key.correct {
+    background: #35e6e6;
+    border-color: #35e6e6;
+    color: #071016;
+}
+
+.key.close {
+    background: #ff9d3f;
+    border-color: #ff9d3f;
+    color: #071016;
+}
+
+.key.wrong {
+    background: #66747a;
+    border-color: #66747a;
+    color: #f2f7ed;
+}
+
+.round-summary {
+    width: min(100%, 420px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 8px;
+}
+
+.summary-row {
+    display: grid;
+    grid-template-columns: 52px 1fr 32px;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: rgba(16, 25, 35, .8);
+    border: 1px solid rgba(74, 88, 98, .75);
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+.summary-percent {
+    color: #35e6e6;
+    font-weight: 800;
+    text-align: left;
+}
+
+.summary-label {
+    color: #f2f7ed;
+    text-align: left;
+}
+
+.summary-count {
+    color: #d5ff45;
+    font-weight: 800;
+    text-align: right;
+}
+
+@media (max-width: 560px) {
+    .guess-row .letter-box {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .key {
+        min-width: 24px;
+        padding: 0 10px;
+        font-size: .85rem;
+    }
+
+    .summary-row {
+        grid-template-columns: 46px 1fr 28px;
+    }
 }

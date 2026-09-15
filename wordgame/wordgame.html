@@ -26,66 +26,18 @@
 
         <main>
             <section class="card game-card">
-                <h2>Wordle Mode</h2>
-                <p>Find the hidden five-letter word in six tries.</p>
-            
+                <div class="wordle-shell">
+                    <div id="guess-display" class="guess-display" aria-live="polite"></div>
 
-                <div id="secret-display"></div>
-                
-                <div id="guess-display"></div>
+                    <div id="keyboard" class="keyboard" aria-label="Word keyboard"></div>
 
-                 <label for="guess-field">Enter your guess:</label>
-                 <input type="text" id="guess-field" maxlength="5" placeholder="APPLE">
+                    <p id="message-text">Guess the hidden word.</p>
 
-                 <button id="guess-button">Make Guess</button>
-                 <button id="reset-button">Reset Game</button>
+                    <div id="round-summary" class="round-summary" aria-live="polite"></div>
+                </div>
 
-                 <p id="message-text">Enter a 5-letter word.</p>
+                <input type="text" id="guess-field" maxlength="5" autocomplete="off" aria-label="Guess input" />
             </section>
-
-            <!-- history-table -->
-             <section class="card">
-                <h2>Guess History</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Attempt</th>
-                            <th>Guess</th>
-                            <th>Result</th>
-                        </tr>
-                    </thead>
-                    <tbody id="history-table-body">
-                        <!-- history rows will be added here dynamically -->
-                    </tbody>
-                </table>
-             </section>
-
-             <section class="card">
-                <h2>Letter feedback</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Color</th>
-                            <th>Meaning</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="correct-demo">Green</td>
-                            <td>Correct letter in the correct position</td>
-                        </tr>
-                        <tr>
-                            <td class="close-demo">Yellow</td>
-                            <td>Correct letter but in the wrong position</td>
-                        </tr>
-                        <tr>
-                            <td class="wrong-demo">Gray</td>
-                            <td>Letter is not in the word</td>
-                        </tr>
-                    </tbody>
-                </table>
-             </section>
-
         </main>
 
         <footer>
