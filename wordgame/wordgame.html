@@ -33,7 +33,12 @@
 
                     <p id="message-text">Guess the hidden word.</p>
 
-                    <div id="round-summary" class="round-summary" aria-live="polite"></div>
+                    <div id="round-summary" class="round-summary" hidden aria-live="polite"></div>
+
+                    <div class="summary-actions">
+                        <button id="play-again" type="button" hidden>Play Again</button>
+                        <button id="reset-history" class="secondary-button" type="button">Reset History</button>
+                    </div>
                 </div>
 
                 <input type="text" id="guess-field" maxlength="5" autocomplete="off" aria-label="Guess input" />

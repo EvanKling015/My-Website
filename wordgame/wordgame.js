@@ -1,42 +1,34 @@
 const words = [
-    "about", "above", "abuse", "actor", "admit", "adopt", "adult", "after", "again", "agent",
-    "agree", "ahead", "alarm", "album", "alert", "alike", "alive", "allow", "alone", "along",
-    "among", "anger", "angle", "angry", "apart", "apple", "apply", "arena", "argue", "arise",
-    "array", "aside", "asset", "audio", "avoid", "award", "awake", "aware", "badly", "baker",
-    "bases", "basic", "beach", "beard", "beast", "being", "below", "bench", "berry", "birth",
-    "black", "blame", "blind", "block", "blood", "board", "boost", "bound", "brain", "bread",
-    "break", "bring", "brown", "build", "built", "buyer", "cabin", "cable", "carry", "catch",
-    "cause", "chair", "chess", "chief", "child", "chord", "chunk", "civic", "civil", "claim",
-    "class", "clean", "clear", "click", "clock", "close", "coach", "coast", "color", "could",
-    "count", "court", "cover", "crack", "craft", "crash", "cream", "cried", "crime", "cross",
-    "crowd", "dance", "dairy", "dream", "drill", "drink", "drive", "drown", "early", "earth",
-    "eager", "eight", "elite", "email", "empty", "enemy", "enjoy", "enter", "entry", "equal",
-    "event", "every", "exact", "exist", "extra", "faith", "false", "fiber", "field", "fifth",
-    "fight", "final", "first", "flame", "focus", "force", "frame", "frank", "fruit", "fully",
-    "giant", "ghost", "given", "glass", "globe", "grace", "grade", "grain", "grand", "grape",
-    "green", "group", "guard", "guess", "guide", "happy", "heart", "heavy", "hence", "honey",
-    "house", "human", "ideal", "image", "index", "inner", "issue", "joint", "judge", "juice",
-    "knock", "known", "label", "large", "laser", "later", "laugh", "learn", "lease", "least",
-    "leave", "legal", "level", "light", "limit", "local", "logic", "lunar", "magic", "major",
-    "maker", "match", "medal", "media", "metal", "might", "model", "money", "month", "motor",
-    "music", "noble", "noise", "north", "novel", "nurse", "ocean", "offer", "often", "order",
-    "other", "outer", "owner", "paint", "panel", "party", "peace", "peach", "phase", "phone",
+    "about", "after", "again", "alert", "alien", "allow", "alone", "angel", "angle", "apple",
+    "arena", "argue", "array", "aside", "asset", "audio", "avoid", "award", "baker", "basic",
+    "beach", "beard", "beast", "begin", "being", "below", "bench", "berry", "birth", "black",
+    "blame", "block", "blood", "board", "boost", "bound", "brain", "bread", "break", "bring",
+    "brown", "build", "buyer", "cabin", "cable", "carry", "catch", "cause", "chair", "chase",
+    "chess", "chief", "child", "civic", "civil", "claim", "class", "clean", "clear", "click",
+    "clock", "close", "coach", "coast", "color", "count", "court", "cover", "craft", "crane",
+    "crazy", "cream", "crime", "dance", "dear", "depth", "dream", "drink", "drive", "eager",
+    "early", "earth", "eight", "elite", "empty", "enemy", "enjoy", "enter", "entry", "equal",
+    "event", "every", "exact", "extra", "faith", "field", "fifth", "fight", "final", "first",
+    "focus", "force", "frame", "fruit", "giant", "glass", "globe", "grace", "grade", "grain",
+    "grand", "grape", "green", "group", "guard", "guess", "guide", "happy", "heart", "heavy",
+    "honey", "house", "human", "ideal", "image", "index", "inner", "joint", "judge", "juice",
+    "knock", "known", "label", "large", "later", "laugh", "learn", "leave", "legal", "level",
+    "light", "limit", "local", "logic", "major", "maker", "match", "media", "metal", "might",
+    "model", "money", "month", "music", "noble", "noise", "north", "novel", "ocean", "offer",
+    "often", "order", "other", "outer", "owner", "paint", "panel", "party", "peace", "phone",
     "piece", "pilot", "pitch", "place", "plain", "plane", "plant", "point", "power", "press",
-    "price", "pride", "prime", "print", "prior", "proof", "proud", "queen", "quick", "quiet",
-    "quite", "radio", "raise", "range", "rapid", "ratio", "reach", "ready", "refer", "right",
-    "river", "robot", "rough", "round", "route", "royal", "ruler", "scale", "scene", "score",
-    "serve", "seven", "shall", "shape", "share", "sharp", "sheep", "sheet", "shelf", "shift",
-    "shine", "shock", "shore", "short", "shown", "sight", "since", "skill", "sleep", "slide",
-    "small", "smart", "smile", "smith", "smoke", "solid", "solve", "sound", "south", "space",
-    "speed", "spend", "split", "sport", "staff", "stage", "stand", "start", "state", "steam",
-    "steel", "stick", "still", "stock", "stone", "store", "storm", "story", "study", "stuff",
-    "style", "suite", "table", "taken", "teach", "teeth", "tempo", "thank", "theft", "their",
-    "theme", "there", "these", "thick", "thing", "think", "third", "those", "three", "throw",
-    "tiger", "title", "toast", "total", "touch", "track", "trade", "train", "treat", "trial",
-    "trick", "truck", "trust", "truth", "under", "union", "until", "upper", "value", "video",
-    "visit", "vital", "voice", "waste", "watch", "water", "while", "white", "whole", "whose",
-    "woman", "women", "world", "worry", "worse", "would", "write", "wrong", "young", "youth",
-    "zesty"
+    "price", "pride", "prime", "print", "prior", "proof", "queen", "quick", "quiet", "quite",
+    "radio", "raise", "range", "rapid", "reach", "ready", "right", "river", "robot", "rough",
+    "round", "route", "royal", "scale", "scene", "score", "serve", "seven", "shall", "shape",
+    "share", "sharp", "sheep", "sheet", "shift", "shine", "shore", "short", "shown", "sight",
+    "since", "skill", "sleep", "slide", "small", "smart", "smile", "smith", "smoke", "solid",
+    "solve", "sound", "south", "space", "speed", "spend", "split", "sport", "staff", "stage",
+    "stand", "start", "state", "steam", "steel", "stick", "still", "stock", "stone", "store",
+    "storm", "story", "study", "style", "table", "teach", "teeth", "thank", "their", "theme",
+    "there", "these", "thing", "think", "third", "those", "three", "throw", "title", "total",
+    "touch", "track", "trade", "train", "treat", "trial", "truck", "trust", "truth", "under",
+    "union", "until", "upper", "value", "video", "visit", "vital", "voice", "watch", "water",
+    "while", "white", "whole", "woman", "world", "would", "write", "wrong", "young", "youth"
 ];
 
 const WORD_LENGTH = 5;
@@ -65,10 +57,27 @@ const guessDisplay = document.getElementById("guess-display");
 const messageText = document.getElementById("message-text");
 const roundSummaryEl = document.getElementById("round-summary");
 const keyboardEl = document.getElementById("keyboard");
+const playAgainButton = document.getElementById("play-again");
+const resetHistoryButton = document.getElementById("reset-history");
+let isRoundFinished = false;
 
 let myConfetti = null;
 if (window.confetti) {
     myConfetti = confetti.create(null, { resize: true, useWorker: true });
+}
+
+function resetHistory() {
+    totalGames = 0;
+    roundSummary = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+        incorrect: 0
+    };
+    renderSummary();
 }
 
 function startGame() {
@@ -78,8 +87,11 @@ function startGame() {
     board = Array.from({ length: MAX_GUESSES }, () => Array(WORD_LENGTH).fill(""));
     evaluationBoard = Array.from({ length: MAX_GUESSES }, () => Array(WORD_LENGTH).fill(""));
     keyboardState = {};
+    isRoundFinished = false;
     messageText.textContent = "Guess the hidden word.";
     guessField.value = "";
+    roundSummaryEl.hidden = true;
+    playAgainButton.hidden = true;
     renderBoard();
     renderKeyboard();
     renderSummary();
@@ -256,8 +268,9 @@ function submitGuess() {
     if (guess === secretWord) {
         totalGames += 1;
         roundSummary[tries] += 1;
+        isRoundFinished = true;
         messageText.textContent = `You got it in ${tries} guess${tries === 1 ? "" : "es"}!`;
-        renderSummary();
+        showRoundSummary();
         if (myConfetti) {
             myConfetti({ particleCount: 150, spread: 360 });
         }
@@ -268,8 +281,9 @@ function submitGuess() {
     if (tries >= MAX_GUESSES) {
         totalGames += 1;
         roundSummary.incorrect += 1;
+        isRoundFinished = true;
         messageText.textContent = `No more guesses. The word was ${secretWord.toUpperCase()}.`;
-        renderSummary();
+        showRoundSummary();
         guessField.blur();
         return;
     }
@@ -306,7 +320,15 @@ function renderSummary() {
     roundSummaryEl.innerHTML = rows;
 }
 
+function showRoundSummary() {
+    renderSummary();
+    roundSummaryEl.hidden = false;
+    playAgainButton.hidden = false;
+}
+
 document.addEventListener("keydown", (event) => {
+    if (isRoundFinished) return;
+
     const key = event.key;
 
     if (key === "Enter") {
@@ -325,6 +347,14 @@ document.addEventListener("keydown", (event) => {
         event.preventDefault();
         handleKeyboardInput(key);
     }
+});
+
+playAgainButton.addEventListener("click", () => {
+    startGame();
+});
+
+resetHistoryButton.addEventListener("click", () => {
+    resetHistory();
 });
 
 startGame();

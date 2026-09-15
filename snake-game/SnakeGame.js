@@ -4,6 +4,8 @@ class SnakeGame {
         this.gameScreen = document.getElementById("game-screen");
         this.setupPanel = document.getElementById("setup-panel");
         this.gameOverPanel = document.getElementById("game-over");
+        this.gameOverLabel = document.querySelector(".game-over-label");
+        this.gameOverTitle = document.querySelector(".game-over h2");
         this.scoreTag = document.getElementById("current-score");
         this.highScoreTag = document.getElementById("high-score");
         this.finalScoreTag = document.getElementById("final-score");
@@ -12,6 +14,7 @@ class SnakeGame {
         this.highScore = Number(localStorage.getItem("high-score") || 0);
         this.foods = [];
         this.gameOverState = false;
+        this.winState = false;
 
         document.getElementById("start-game").addEventListener("click", () => this.startGame());
         document.getElementById("play-again").addEventListener("click", () => this.startGame());
@@ -50,6 +53,7 @@ class SnakeGame {
         this.bombTriggered = false;
         this.score = 0;
         this.gameOverState = false;
+        this.winState = false;
         this.setupPanel.hidden = true;
         this.gameScreen.hidden = false;
         this.gameOverPanel.hidden = true;
@@ -167,12 +171,23 @@ class SnakeGame {
         return snakeHtml;
     }
 
-    gameOver() {
+    showResult(labelText, titleText) {
         if (this.gameOverState) return;
         this.stop();
         this.gameOverState = true;
         this.finalScoreTag.innerText = `FINAL SCORE: ${this.score}`;
+        this.gameOverLabel.innerText = labelText;
+        this.gameOverTitle.innerText = titleText;
         this.gameOverPanel.hidden = false;
+    }
+
+    gameOver() {
+        this.showResult("RUN ENDED", "GAME OVER");
+    }
+
+    winGame() {
+        this.winState = true;
+        this.showResult("BOARD CLEARED", "YOU WIN");
     }
 
     start() {
@@ -213,6 +228,11 @@ class SnakeGame {
             }
 
             this.increaseScore();
+
+            if (this.foods.length === 0) {
+                this.winGame();
+                return;
+            }
         }
         this.draw();
     }
