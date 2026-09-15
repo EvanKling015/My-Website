@@ -86,8 +86,27 @@ class SnakeGame {
         for (let i = 0; i < spacesToFill; i++) {
             const spaceIndex = Math.floor(Math.random() * freeSpaces.length);
             const [x, y] = freeSpaces.splice(spaceIndex, 1)[0];
-            const type = this.foodMode === "bomb" && !this.bombTriggered && this.foods.length === 0 ? "bomb" : this.getFruitType();
-            this.foods.push(new Food(x, y, "red", type));
+            this.foods.push(new Food(x, y, "red", this.getFruitType()));
+        }
+    }
+
+    triggerBombBurst() {
+        const boardCapacity = this.gridWidth * this.gridHeight - this.snake.snakeBody.length;
+        let remainingSpace = Math.max(0, boardCapacity - this.foods.length);
+
+        while (remainingSpace > 0) {
+            const freeSpaces = this.getFreeSpaces();
+            if (freeSpaces.length === 0) break;
+
+            const spawnCount = Math.min(4, remainingSpace, freeSpaces.length);
+            for (let i = 0; i < spawnCount; i++) {
+                const spaceIndex = Math.floor(Math.random() * freeSpaces.length);
+                const [x, y] = freeSpaces.splice(spaceIndex, 1)[0];
+                this.foods.push(new Food(x, y, "red", this.getFruitType()));
+            }
+
+            remainingSpace -= spawnCount;
+            if (spawnCount < 4) break;
         }
     }
 
@@ -191,13 +210,17 @@ class SnakeGame {
             const collectedFood = this.foods[foodIndex];
             this.snake.growSnake(this.snake.headX, this.snake.headY);
             this.foods.splice(foodIndex, 1);
-            if (collectedFood.type === "bomb") {
+
+            if (this.foodMode === "bomb") {
                 this.bombTriggered = true;
-                this.foodCount = Math.floor(Math.random() * 5) + 4;
+                this.triggerBombBurst();
             } else if (this.foodMode === "random") {
                 this.foodCount = Math.floor(Math.random() * 6) + 1;
+                this.placeFoods();
+            } else {
+                this.placeFoods();
             }
-            this.placeFoods();
+
             this.increaseScore();
         }
         this.draw();
