@@ -16,10 +16,42 @@ class SnakeGame {
         this.gameOverState = false;
         this.winState = false;
 
+        this.settingsPanel = document.getElementById("settings-panel");
+        this.quickPlayButton = document.getElementById("quick-play");
+        this.showSettingsButton = document.getElementById("show-settings");
+
+        this.quickPlayButton.addEventListener("click", () => {
+            this.setDefaultSettings();
+            this.startGame();
+        });
+        this.showSettingsButton.addEventListener("click", () => {
+            this.settingsPanel.hidden = false;
+            this.showSettingsButton.classList.add("is-active");
+        });
         document.getElementById("start-game").addEventListener("click", () => this.startGame());
         document.getElementById("play-again").addEventListener("click", () => this.startGame());
         document.getElementById("back-to-menu").addEventListener("click", () => this.showSetup());
         this.updateScoreBoard();
+        this.showSettings(false);
+    }
+
+    setDefaultSettings() {
+        const defaultMap = document.querySelector("input[name='map-size'][value='15x17']");
+        const defaultSpeed = document.querySelector("input[name='game-speed'][value='230']");
+        const defaultFood = document.querySelector("input[name='food-count'][value='5']");
+        const defaultFruit = document.querySelector("input[name='fruit-type'][value='apple']");
+        const defaultColor = document.querySelector("input[name='snake-color'][value='#9be34f']");
+
+        if (defaultMap) defaultMap.checked = true;
+        if (defaultSpeed) defaultSpeed.checked = true;
+        if (defaultFood) defaultFood.checked = true;
+        if (defaultFruit) defaultFruit.checked = true;
+        if (defaultColor) defaultColor.checked = true;
+    }
+
+    showSettings(show = true) {
+        this.settingsPanel.hidden = !show;
+        this.showSettingsButton.classList.toggle("is-active", show);
     }
 
     readSettings() {
@@ -75,6 +107,7 @@ class SnakeGame {
         this.gameScreen.hidden = true;
         this.gameOverPanel.hidden = true;
         this.setupPanel.hidden = false;
+        this.showSettings(false);
     }
 
     createObjects() {

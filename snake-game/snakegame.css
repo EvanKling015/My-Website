@@ -32,6 +32,38 @@ body { text-align: center; }
     border-bottom: 1px solid rgba(154, 169, 157, .35);
 }
 
+.menu-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.menu-action {
+    border: 1px solid #35e6e6;
+    background: transparent;
+    color: #d2ddd2;
+    padding: 10px 14px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.menu-action.primary-action {
+    background: #d5ff45;
+    border-color: #d5ff45;
+    color: #090c12;
+    box-shadow: 0 0 14px rgba(213, 255, 69, .2);
+}
+
+.menu-action.secondary-action:hover,
+.menu-action.is-active {
+    background: rgba(53, 230, 230, .1);
+    color: #f2f7ed;
+    box-shadow: 0 0 12px rgba(53, 230, 230, .2);
+}
+
 .setup-kicker {
     margin: 0 0 8px;
     color: #ff4f9a;

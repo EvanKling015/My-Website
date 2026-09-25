@@ -30,109 +30,111 @@
                     <div class="menu-header">
                         <div>
                             <p class="setup-kicker">ARCADE MODE</p>
-                            <h2>Choose your game</h2>
+                            <h2>Play or Settings</h2>
                         </div>
-                        <div class="menu-preview" aria-hidden="true">
-                            <span class="preview-snake"></span>
-                            <span class="preview-apple"></span>
+                        <div class="menu-actions" aria-label="Game actions">
+                            <button id="quick-play" class="menu-action primary-action" type="button">Play</button>
+                            <button id="show-settings" class="menu-action secondary-action" type="button">Settings</button>
                         </div>
                     </div>
-                    <p class="menu-copy">Set the board, pace, food, and snake color before you play.</p>
+                    <p class="menu-copy">Quick play starts on the regular board, or open settings for custom rules.</p>
 
-                    <fieldset class="picker-group">
-                        <legend>Map size</legend>
-                        <div class="option-cards map-cards">
-                            <label class="option-card">
-                                <input type="radio" name="map-size" value="15x17" checked>
-                                <span class="map-preview standard-preview"></span>
-                                <strong>Medium</strong><small>15 x 17</small>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" name="map-size" value="9x10">
-                                <span class="map-preview small-preview"></span>
-                                <strong>Small</strong><small>9 x 10</small>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" name="map-size" value="21x24">
-                                <span class="map-preview large-preview"></span>
-                                <strong>Large</strong><small>21 x 24</small>
-                            </label>
-                        </div>
-                    </fieldset>
+                    <div id="settings-panel" hidden>
+                        <fieldset class="picker-group">
+                            <legend>Map size</legend>
+                            <div class="option-cards map-cards">
+                                <label class="option-card">
+                                    <input type="radio" name="map-size" value="15x17" checked>
+                                    <span class="map-preview standard-preview"></span>
+                                    <strong>Medium</strong><small>15 x 17</small>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="map-size" value="9x10">
+                                    <span class="map-preview small-preview"></span>
+                                    <strong>Small</strong><small>9 x 10</small>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="map-size" value="21x24">
+                                    <span class="map-preview large-preview"></span>
+                                    <strong>Large</strong><small>21 x 24</small>
+                                </label>
+                            </div>
+                        </fieldset>
 
-                    <fieldset class="picker-group">
-                        <legend>Speed</legend>
-                        <div class="option-cards speed-cards">
-                            <label class="option-card">
-                                <input type="radio" name="game-speed" value="320">
-                                <span class="speed-preview slow-preview">🐢</span>
-                                <strong>Slow</strong>
+                        <fieldset class="picker-group">
+                            <legend>Speed</legend>
+                            <div class="option-cards speed-cards">
+                                <label class="option-card">
+                                    <input type="radio" name="game-speed" value="320">
+                                    <span class="speed-preview slow-preview">🐢</span>
+                                    <strong>Slow</strong>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="game-speed" value="230" checked>
+                                    <span class="speed-preview normal-preview">🐍</span>
+                                    <strong>Normal</strong>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="game-speed" value="165">
+                                    <span class="speed-preview fast-preview">🐇</span>
+                                    <strong>Fast</strong>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="picker-group">
+                            <legend>Food on map</legend>
+                            <div class="option-cards food-cards">
+                                <label class="option-card"><input type="radio" name="food-count" value="1"><span class="food-preview stacked-balls">●</span><strong>1</strong></label>
+                                <label class="option-card"><input type="radio" name="food-count" value="3"><span class="food-preview stacked-balls">●●●</span><strong>3</strong></label>
+                                <label class="option-card"><input type="radio" name="food-count" value="5" checked><span class="food-preview stacked-balls">●●●●●</span><strong>5</strong></label>
+                                <label class="option-card"><input type="radio" name="food-count" value="10"><span class="food-preview stacked-balls ten-balls">●●●●●●●●●●</span><strong>10</strong></label>
+                                <label class="option-card"><input type="radio" name="food-count" value="bomb"><span class="food-preview bomb-preview">●</span><strong>Bomb</strong></label>
+                                <label class="option-card"><input type="radio" name="food-count" value="random"><span class="food-preview die-preview">⚄</span><strong>Die</strong><small>1-6 fruits</small></label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="picker-group">
+                            <legend>Fruit style</legend>
+                            <div class="option-cards fruit-cards">
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="apple" checked><span class="fruit-preview">🍎</span><strong>Apple</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="banana"><span class="fruit-preview">🍌</span><strong>Banana</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="orange"><span class="fruit-preview">🍊</span><strong>Orange</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="grapes"><span class="fruit-preview">🍇</span><strong>Grapes</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="watermelon"><span class="fruit-preview">🍉</span><strong>Melon</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="strawberry"><span class="fruit-preview">🍓</span><strong>Berry</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="cherry"><span class="fruit-preview">🍒</span><strong>Cherry</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="pineapple"><span class="fruit-preview">🍍</span><strong>Pineapple</strong></label>
+                                <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="bowl"><span class="fruit-preview">🍇🍎</span><strong>Fruit Bowl</strong></label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="color-group">
+                            <legend>Snake color</legend>
+                            <label class="color-choice lime-choice">
+                                <input type="radio" name="snake-color" value="#9be34f" checked>
+                                <span></span>Lime
                             </label>
-                            <label class="option-card">
-                                <input type="radio" name="game-speed" value="230" checked>
-                                <span class="speed-preview normal-preview">🐍</span>
-                                <strong>Normal</strong>
+                            <label class="color-choice cyan-choice">
+                                <input type="radio" name="snake-color" value="#35e6e6">
+                                <span></span>Cyan
                             </label>
-                            <label class="option-card">
-                                <input type="radio" name="game-speed" value="165">
-                                <span class="speed-preview fast-preview">🐇</span>
-                                <strong>Fast</strong>
+                            <label class="color-choice pink-choice">
+                                <input type="radio" name="snake-color" value="#ff4f9a">
+                                <span></span>Pink
                             </label>
-                        </div>
-                    </fieldset>
+                            <label class="color-choice orange-choice">
+                                <input type="radio" name="snake-color" value="#ff9d3f">
+                                <span></span>Orange
+                            </label>
+                            <label class="color-choice white-choice">
+                                <input type="radio" name="snake-color" value="#f2f7ed">
+                                <span></span>White
+                            </label>
+                        </fieldset>
 
-                    <fieldset class="picker-group">
-                        <legend>Food on map</legend>
-                        <div class="option-cards food-cards">
-                            <label class="option-card"><input type="radio" name="food-count" value="1"><span class="food-preview stacked-balls">●</span><strong>1</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="3"><span class="food-preview stacked-balls">●●●</span><strong>3</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="5" checked><span class="food-preview stacked-balls">●●●●●</span><strong>5</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="10"><span class="food-preview stacked-balls ten-balls">●●●●●●●●●●</span><strong>10</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="bomb"><span class="food-preview bomb-preview">●</span><strong>Bomb</strong></label>
-                            <label class="option-card"><input type="radio" name="food-count" value="random"><span class="food-preview die-preview">⚄</span><strong>Die</strong><small>1-6 fruits</small></label>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="picker-group">
-                        <legend>Fruit style</legend>
-                        <div class="option-cards fruit-cards">
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="apple" checked><span class="fruit-preview">🍎</span><strong>Apple</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="banana"><span class="fruit-preview">🍌</span><strong>Banana</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="orange"><span class="fruit-preview">🍊</span><strong>Orange</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="grapes"><span class="fruit-preview">🍇</span><strong>Grapes</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="watermelon"><span class="fruit-preview">🍉</span><strong>Melon</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="strawberry"><span class="fruit-preview">🍓</span><strong>Berry</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="cherry"><span class="fruit-preview">🍒</span><strong>Cherry</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="pineapple"><span class="fruit-preview">🍍</span><strong>Pineapple</strong></label>
-                            <label class="option-card fruit-option"><input type="radio" name="fruit-type" value="bowl"><span class="fruit-preview">🍇🍎</span><strong>Fruit Bowl</strong></label>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="color-group">
-                        <legend>Snake color</legend>
-                        <label class="color-choice lime-choice">
-                            <input type="radio" name="snake-color" value="#9be34f" checked>
-                            <span></span>Lime
-                        </label>
-                        <label class="color-choice cyan-choice">
-                            <input type="radio" name="snake-color" value="#35e6e6">
-                            <span></span>Cyan
-                        </label>
-                        <label class="color-choice pink-choice">
-                            <input type="radio" name="snake-color" value="#ff4f9a">
-                            <span></span>Pink
-                        </label>
-                        <label class="color-choice orange-choice">
-                            <input type="radio" name="snake-color" value="#ff9d3f">
-                            <span></span>Orange
-                        </label>
-                        <label class="color-choice white-choice">
-                            <input type="radio" name="snake-color" value="#f2f7ed">
-                            <span></span>White
-                        </label>
-                    </fieldset>
-
-                    <button id="start-game" type="button"><span class="play-icon">▶</span> Play</button>
+                        <button id="start-game" type="button"><span class="play-icon">▶</span> Play</button>
+                    </div>
                 </div>
 
                 <div id="game-screen" class="game-screen" hidden>
