@@ -114,42 +114,67 @@ nav li { display: inline-block; }
 
 .game-thumb {
     position: relative;
-    height: 180px;
-    padding: 12px;
+    height: 210px;
+    padding: 0;
     border-bottom: 2px solid var(--line);
     overflow: hidden;
+    background: #0a1117;
 }
 
-.thumb-number { background: linear-gradient(135deg, rgba(53,230,230,.3), rgba(213,255,69,.18)); }
-.thumb-word { background: linear-gradient(135deg, rgba(255,157,63,.26), rgba(255,79,154,.18)); }
-.thumb-snake { background: linear-gradient(135deg, rgba(213,255,69,.24), rgba(53,230,230,.18)); }
-.thumb-pong { background: linear-gradient(135deg, rgba(255,79,154,.22), rgba(53,230,230,.2)); }
+.thumb-number {
+    background:
+        radial-gradient(circle at 22% 22%, rgba(53,230,230,.6), transparent 25%),
+        radial-gradient(circle at 78% 18%, rgba(213,255,69,.42), transparent 25%),
+        linear-gradient(135deg, rgba(8,16,21,.98), rgba(15,28,34,.95));
+}
+
+.thumb-word {
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,157,63,.6), transparent 26%),
+        radial-gradient(circle at 78% 18%, rgba(255,79,154,.42), transparent 26%),
+        linear-gradient(135deg, rgba(20,10,18,.96), rgba(26,18,24,.95));
+}
+
+.thumb-snake {
+    background:
+        radial-gradient(circle at 25% 20%, rgba(213,255,69,.52), transparent 27%),
+        radial-gradient(circle at 80% 20%, rgba(53,230,230,.52), transparent 30%),
+        linear-gradient(135deg, rgba(8,18,20,.98), rgba(12,22,22,.96));
+}
+
+.thumb-pong {
+    background:
+        radial-gradient(circle at 30% 14%, rgba(255,79,154,.7), transparent 18%),
+        radial-gradient(circle at 74% 18%, rgba(53,230,230,.5), transparent 26%),
+        linear-gradient(135deg, rgba(15,10,23,.98), rgba(12,17,27,.96));
+}
 
 .mini-scene {
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(10,18,24,.96), rgba(17,26,32,.94));
-    border: 2px solid rgba(255,255,255,.08);
+    border-radius: 0;
+    background: linear-gradient(180deg, rgba(5,9,14,.18), rgba(5,11,14,.45));
     overflow: hidden;
+    box-shadow: inset 0 0 24px rgba(255,255,255,.04);
 }
 
 .mini-scene::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(rgba(255,255,255,.04), transparent 25%, transparent 75%, rgba(255,255,255,.03));
+    background: linear-gradient(rgba(255,255,255,.06), transparent 22%, transparent 72%, rgba(255,255,255,.04));
 }
 
 .mini-header {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
+    top: 12px;
+    left: 12px;
+    right: 12px;
     height: 18px;
     border-radius: 6px;
     background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.08);
 }
 
 .mini-header::before,
@@ -163,34 +188,34 @@ nav li { display: inline-block; }
 }
 
 .mini-header::before { left: 8px; width: 40px; }
-.mini-header::after { right: 8px; width: 28px; }
+.mini-header::after { right: 10px; width: 30px; }
 
 .scene-number .mini-prompt {
     position: absolute;
     left: 18px;
-    top: 46px;
-    width: 70%;
-    height: 14px;
-    border-radius: 6px;
+    top: 52px;
+    width: 68%;
+    height: 16px;
+    border-radius: 999px;
     background: rgba(53,230,230,.26);
-    box-shadow: 0 0 12px rgba(53,230,230,.18);
+    box-shadow: 0 0 16px rgba(53,230,230,.2);
 }
 
 .scene-number .mini-bubble {
     position: absolute;
     right: 18px;
-    bottom: 22px;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
+    bottom: 20px;
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
     display: grid;
     place-items: center;
     background: linear-gradient(135deg, rgba(213,255,69,.9), rgba(53,230,230,.8));
-    color: #081116;
+    color: #071116;
     font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    box-shadow: 0 0 14px rgba(213,255,69,.32);
+    box-shadow: 0 0 18px rgba(213,255,69,.4);
 }
 
 .scene-number .mini-grid {
@@ -198,24 +223,24 @@ nav li { display: inline-block; }
     left: 18px;
     bottom: 18px;
     width: 52%;
-    height: 52px;
+    height: 58px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
+    gap: 7px;
 }
 
 .scene-number .mini-grid span {
     display: block;
-    border-radius: 6px;
+    border-radius: 8px;
     background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.08);
 }
 
 .scene-word .mini-keys {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    bottom: 18px;
+    left: 18px;
+    right: 18px;
+    bottom: 16px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 6px;
@@ -224,19 +249,20 @@ nav li { display: inline-block; }
 .scene-word .mini-keys span {
     display: grid;
     place-items: center;
-    height: 22px;
+    height: 24px;
     border-radius: 5px;
-    background: rgba(255,255,255,.08);
+    background: rgba(255,255,255,.07);
     color: #f2f7ed;
     font-size: 11px;
     font-weight: bold;
+    border: 1px solid rgba(255,255,255,.08);
 }
 
 .scene-word .mini-wordbox {
     position: absolute;
-    left: 18px;
-    right: 18px;
-    top: 42px;
+    left: 20px;
+    right: 20px;
+    top: 48px;
     display: flex;
     justify-content: space-between;
     gap: 8px;
@@ -245,10 +271,11 @@ nav li { display: inline-block; }
 .scene-word .mini-wordbox span {
     display: block;
     flex: 1;
-    height: 30px;
-    border-radius: 7px;
-    background: rgba(53,230,230,.18);
-    border: 1px solid rgba(53,230,230,.55);
+    height: 32px;
+    border-radius: 9px;
+    background: rgba(53,230,230,.16);
+    border: 1px solid rgba(53,230,230,.6);
+    box-shadow: inset 0 0 12px rgba(53,230,230,.12);
 }
 
 .scene-snake .mini-board {
@@ -257,10 +284,11 @@ nav li { display: inline-block; }
     right: 18px;
     bottom: 18px;
     top: 52px;
-    border-radius: 10px;
-    background-image: linear-gradient(rgba(53,230,230,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(53,230,230,.14) 1px, transparent 1px), linear-gradient(180deg, rgba(7,16,22,.9), rgba(8,14,18,.95));
+    border-radius: 12px;
+    background-image: linear-gradient(rgba(53,230,230,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(53,230,230,.12) 1px, transparent 1px), linear-gradient(180deg, rgba(7,16,22,.9), rgba(8,14,18,.95));
     background-size: 18px 18px, 18px 18px, 100% 100%;
-    border: 1px solid rgba(53,230,230,.7);
+    border: 1px solid rgba(53,230,230,.72);
+    box-shadow: inset 0 0 18px rgba(53,230,230,.08);
 }
 
 .scene-snake .mini-snake {
@@ -294,16 +322,17 @@ nav li { display: inline-block; }
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: #ef3f52;
-    box-shadow: 0 0 12px rgba(239,63,82,.8);
+    background: radial-gradient(circle at 35% 35%, #ffd7d6, #ff5a6a 42%, #d32d3d 74%);
+    box-shadow: 0 0 10px rgba(239,63,82,.75);
 }
 
 .scene-pong .mini-court {
     position: absolute;
-    inset: 42px 18px 18px 18px;
-    border-radius: 10px;
+    inset: 46px 18px 18px 18px;
+    border-radius: 12px;
     background: linear-gradient(180deg, rgba(12,18,26,.96), rgba(10,14,20,.94));
     border: 1px solid rgba(255,79,154,.7);
+    box-shadow: inset 0 0 18px rgba(255,79,154,.08);
 }
 
 .scene-pong .mini-court::before {
@@ -339,8 +368,8 @@ nav li { display: inline-block; }
     height: 12px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    background: #d5ff45;
-    box-shadow: 0 0 12px rgba(213,255,69,.6);
+    background: radial-gradient(circle at 35% 35%, #fff6b8, #d5ff45 40%, #9adf2a 100%);
+    box-shadow: 0 0 12px rgba(213,255,69,.65);
 }
 
 .game-card-copy {
