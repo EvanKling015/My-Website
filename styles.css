@@ -122,31 +122,35 @@ nav li { display: inline-block; }
 }
 
 .thumb-number {
-    background:
-        radial-gradient(circle at 22% 22%, rgba(53,230,230,.6), transparent 25%),
-        radial-gradient(circle at 78% 18%, rgba(213,255,69,.42), transparent 25%),
-        linear-gradient(135deg, rgba(8,16,21,.98), rgba(15,28,34,.95));
+    background-image:
+        linear-gradient(180deg, rgba(8,12,18,.28), rgba(8,12,18,.68)),
+        url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
 }
 
 .thumb-word {
-    background:
-        radial-gradient(circle at 30% 20%, rgba(255,157,63,.6), transparent 26%),
-        radial-gradient(circle at 78% 18%, rgba(255,79,154,.42), transparent 26%),
-        linear-gradient(135deg, rgba(20,10,18,.96), rgba(26,18,24,.95));
+    background-image:
+        linear-gradient(180deg, rgba(21,11,16,.2), rgba(21,11,16,.7)),
+        url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
 }
 
 .thumb-snake {
-    background:
-        radial-gradient(circle at 25% 20%, rgba(213,255,69,.52), transparent 27%),
-        radial-gradient(circle at 80% 20%, rgba(53,230,230,.52), transparent 30%),
-        linear-gradient(135deg, rgba(8,18,20,.98), rgba(12,22,22,.96));
+    background-image:
+        linear-gradient(180deg, rgba(3,13,17,.14), rgba(3,13,17,.72)),
+        url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
 }
 
 .thumb-pong {
-    background:
-        radial-gradient(circle at 30% 14%, rgba(255,79,154,.7), transparent 18%),
-        radial-gradient(circle at 74% 18%, rgba(53,230,230,.5), transparent 26%),
-        linear-gradient(135deg, rgba(15,10,23,.98), rgba(12,17,27,.96));
+    background-image:
+        linear-gradient(180deg, rgba(12,10,17,.2), rgba(12,10,17,.72)),
+        url('https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
 }
 
 .mini-scene {
@@ -154,9 +158,10 @@ nav li { display: inline-block; }
     width: 100%;
     height: 100%;
     border-radius: 0;
-    background: linear-gradient(180deg, rgba(5,9,14,.18), rgba(5,11,14,.45));
+    background: transparent;
     overflow: hidden;
     box-shadow: inset 0 0 24px rgba(255,255,255,.04);
+    opacity: 0.08;
 }
 
 .mini-scene::before {

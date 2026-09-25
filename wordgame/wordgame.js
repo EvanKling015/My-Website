@@ -77,7 +77,13 @@ function resetHistory() {
         6: 0,
         incorrect: 0
     };
+    hideRoundSummary();
     renderSummary();
+}
+
+function hideRoundSummary() {
+    roundSummaryEl.hidden = true;
+    playAgainButton.hidden = true;
 }
 
 function startGame() {
@@ -90,8 +96,7 @@ function startGame() {
     isRoundFinished = false;
     messageText.textContent = "Guess the hidden word.";
     guessField.value = "";
-    roundSummaryEl.hidden = true;
-    playAgainButton.hidden = true;
+    hideRoundSummary();
     renderBoard();
     renderKeyboard();
     renderSummary();
